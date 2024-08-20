@@ -424,6 +424,5 @@ public class Stack_06 {
          //! Ques :  Conversion  prefix to Infix
         System.out.println("<======= Conversion prefix to Infix========>");
         prefToInfix("-9/*+5346");
-
     }
 }
