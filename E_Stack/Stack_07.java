@@ -88,7 +88,8 @@ public class Stack_07 {
         System.out.println("<============Celebrity Problem================>");
         int arr[][] = { { 0, 0, 1 }, { 1, 0, 1 }, { 0, 0, 0 } };
         System.out.println("The index number " + isCelebrity(arr) + " is celebrity");
-
+        //Time complexity : O(n)
+        
         //! Ques : Sliding Window
         System.out.println("<===========Sliding Window problem using using Loops==================>");
         int ar[] = { 1, 3, -1, -3, 5, 3, 6, 7 };
