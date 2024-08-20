@@ -362,7 +362,7 @@ public class Stack_06 {
             }else{
                 String v2 = st.pop();
                 String v1 =st.pop();
-                String val = v1+ch+v2;
+                String val ="("+v1+ch+v2+")";
                 st.push(val);
             }
         }
@@ -379,7 +379,7 @@ public class Stack_06 {
             }else{
                 String v1 = st.pop();
                 String v2 =st.pop();
-                String val = v1+ch+v2;
+                String val ="("+ v1+ch+v2 + ")";
                 st.push(val);
             }
         }
