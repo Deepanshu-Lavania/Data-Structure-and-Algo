@@ -68,7 +68,7 @@ public class Queue_02 {
         int val;
         Node next;
 
-        Node(int val){
+        Node(int val){//constructer
             this.val=val;
         }
     }
@@ -78,7 +78,7 @@ public class Queue_02 {
         int size =0;
 
         void add(int val){
-            Node temp  = new Node(val);
+            Node temp  = new Node(val);//used costructer 
             if (size==0) {
                 head=temp;
                 tail=temp;
