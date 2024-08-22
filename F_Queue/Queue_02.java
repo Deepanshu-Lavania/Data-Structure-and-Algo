@@ -118,6 +118,7 @@ public class Queue_02 {
                 temp=temp.next;
             }
         }
+    
     }
 
     public static class CircularArrayQueue{
@@ -200,6 +201,71 @@ public class Queue_02 {
 
     }
 
+    public static class crNode{
+        int val;
+        crNode next;
+
+        crNode(int val){
+            this.val=val;
+        }
+    }
+    public static class LinkedCircularQueue{
+
+        crNode head =null;
+        crNode tail=null;
+        int size=0;
+        void add(int val) {
+            crNode temp = new crNode(val);
+            if (size == 0) {
+                head = temp;
+                tail = temp;
+                tail.next = head; // Circular linking
+            } else {
+                tail.next = temp;
+                tail = temp;
+                tail.next = head; // Maintain circular nature
+            }
+            size++;
+        }
+        void remove(){
+            if (size==0) {
+                System.out.println("Queue is Empty");
+                return;
+            } else if (size == 1) {
+                head = null;
+                tail = null;
+            } else {
+                head = head.next;
+                tail.next = head;
+            }
+            size--;
+        }
+        int peek(){
+            if (size==0) {
+                System.out.println("Queue is Empty");
+                return -1;
+            }
+            else{
+                return head.val;
+            }
+        }
+        boolean isEmpty(){
+            if(size==0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        void display(){
+            crNode temp=head;
+            while (temp.next!=head) {
+                System.out.print(temp.val+" ");
+                temp=temp.next;
+            }
+            System.out.print(temp.val);
+        }
+        
+    }
 
     public static void main(String[] args) throws Exception{
         // ! Implementaion of Queue using Array
@@ -259,5 +325,26 @@ public class Queue_02 {
         caq.add(19);
         caq.add(20);
         caq.display();
+
+System.out.println();
+        //? Implementation of CIRCULAR QUEUE using LinkedList
+        LinkedCircularQueue clq=new LinkedCircularQueue();
+        System.out.println("<===========Implementation of Circular Queue using LinkedList===========>");
+        System.out.println(clq.isEmpty());
+        clq.remove();
+        clq.add(100);
+        clq.add(102);
+        clq.add(103);
+        System.out.println(clq.peek());
+        clq.add(104);
+        clq.remove();
+        clq.remove();
+        System.out.println(clq.isEmpty());
+        clq.add(105);
+        clq.add(106);
+        clq.add(107);
+        clq.add(108);
+        clq.display();
+        System.out.println();
     }
 }
