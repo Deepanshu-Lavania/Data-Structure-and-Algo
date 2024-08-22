@@ -72,6 +72,7 @@ public class Queue_02 {
             this.val=val;
         }
     }
+    
     public static class LinkedQueue {
         Node head = null;
         Node tail =null;
@@ -118,7 +119,89 @@ public class Queue_02 {
             }
         }
     }
-    public static void main(String[] args) {
+
+    public static class CircularArrayQueue{
+        int f=-1;
+        int r=-1;
+        int arr[] = new int[8];
+        int size=0;
+        
+        public void add(int val) throws Exception{
+            if(size==arr.length){
+                throw new Exception("Queue is full");
+            }
+
+             else if (size==0) {
+                f=r=0;
+                arr[0]=val;
+            }
+            
+            // if(r==f){ //? don't care about cross of rear and front due to size
+            //     System.out.println("Queue is full");
+            //     return;
+            // }
+            else if(r<arr.length-1){
+                // arr[++r]=val;
+                arr[r+1]=val;
+                r++;
+            }else if(r == arr.length-1){
+                r=0;
+                arr[0]=val;
+            }
+            size++;
+        }
+        public int remove() throws Exception{
+            if(size==0){
+                throw new Exception("Queue is Empty");
+            }
+            else{
+                int x=arr[f];
+                if(f==arr.length-1) f=0;
+                else f++;
+                size--;
+                return x;
+            }
+        }
+        public boolean isEmpty(){
+            if (size==0) {
+                System.out.println("Queue is Empty");
+                return true;
+            }else return false;
+        }
+        public  int peek(){
+            if (size==0) {
+                System.out.println("Queue is Empty");
+                return -1;
+            }else{
+                int x=arr[f];
+                return x;
+            }
+        }
+        public void display(){
+            if (size == 0) {
+                System.out.println("Queue is empty");
+                return;
+            }
+            if(f<=r){
+                for (int i = f; i <= r; i++) {
+                    System.out.print(arr[i]+" ");
+                }
+            }
+            else{
+                for (int i = 0; i <=r; i++) {
+                    System.out.print(arr[i]+" ");
+                }
+                for (int i = f; i < arr.length; i++) {
+                    System.out.print(arr[i]+" ");
+                }
+            }
+            System.out.println();
+        }
+
+    }
+
+
+    public static void main(String[] args) throws Exception{
         // ! Implementaion of Queue using Array
         ArrayQueue aq = new ArrayQueue();
         System.out.println("<=========== Implementaion of Queue using Array=============>");
@@ -150,7 +233,31 @@ public class Queue_02 {
         lq.add(5);
         lq.add(6);
         lq.display();
+        System.out.println();
 
+        //! CIRCULAR QUEUE
 
+        //? Implementation of CIRCULAR QUEUE using array
+        CircularArrayQueue caq=new CircularArrayQueue();
+        System.out.println("<===========Implementation of CIRCULAR Queue using Array===========>");
+        caq.add(10);
+        caq.add(11);
+        caq.add(12);
+        caq.add(13);
+        caq.add(14);
+        caq.add(15);
+        caq.add(16);
+        caq.add(17);
+        caq.remove();
+        caq.remove();
+        caq.remove();
+        caq.isEmpty();
+        caq.peek();
+        caq.display();
+
+        caq.add(18);
+        caq.add(19);
+        caq.add(20);
+        caq.display();
     }
 }
