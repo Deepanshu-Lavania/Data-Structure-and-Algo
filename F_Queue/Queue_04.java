@@ -12,11 +12,55 @@ public class Queue_04 {
                     System.out.print(arr[j + i] + " ");
                     flag = true;
                     break;
-                }
+                } 
             }
             if (!flag)
                 System.out.print("0" + " ");
         }
+    }
+    public static void reorderQueue(){
+        System.out.println();
+        System.out.println("<==========Reorder Queue===========>");
+        Queue<Integer> q = new LinkedList<>();
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+        q.add(5);
+        q.add(6);
+        q.add(7);
+        q.add(8);
+        System.out.println(q);
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i <=(q.size()/2)+1; i++) {
+            st.push(q.remove());
+        }
+        //-----------> O(n/2)
+        System.out.println(q);
+        System.out.println(st);
+        while (st.size()!=0) {
+            q.add(st.pop());
+        }//------------> O(n)
+        System.out.println(q);
+        for (int i = 0; i <=(q.size()/2)+1; i++) {
+            st.push(q.remove());
+        }//-------------> O(n/2)
+        System.out.println(q);
+        System.out.println(st);
+
+        while (st.size()!=0) {
+            q.add(st.pop());
+            q.add(q.remove());
+        }//------------> O(n)
+        System.out.println(q);
+        //* Reverse the queue
+        while (q.size()!=0) {
+            st.push(q.remove());
+        }
+        while (st.size()!=0){
+            q.add(st.pop());
+        }//------------->O(n)
+        System.out.println(q);
     }
 
     public static int[] printArrFirstNegInteger(int arr[], int n, int k) {
@@ -61,5 +105,7 @@ public class Queue_04 {
         }
         //? Time Complexity :O(n) + O(n) ~> O(n)
 
+        //! Ques : Reorder queue ( interleave 1st half with 2nd half)
+        reorderQueue();
     }
 }
