@@ -18,51 +18,7 @@ public class Queue_04 {
                 System.out.print("0" + " ");
         }
     }
-    public static void reorderQueue(){
-        System.out.println();
-        System.out.println("<==========Reorder Queue===========>");
-        Queue<Integer> q = new LinkedList<>();
-        q.add(1);
-        q.add(2);
-        q.add(3);
-        q.add(4);
-        q.add(5);
-        q.add(6);
-        q.add(7);
-        q.add(8);
-        System.out.println(q);
-        Stack<Integer> st = new Stack<>();
-        for (int i = 0; i <=(q.size()/2)+1; i++) {
-            st.push(q.remove());
-        }
-        //-----------> O(n/2)
-        System.out.println(q);
-        System.out.println(st);
-        while (st.size()!=0) {
-            q.add(st.pop());
-        }//------------> O(n)
-        System.out.println(q);
-        for (int i = 0; i <=(q.size()/2)+1; i++) {
-            st.push(q.remove());
-        }//-------------> O(n/2)
-        System.out.println(q);
-        System.out.println(st);
-
-        while (st.size()!=0) {
-            q.add(st.pop());
-            q.add(q.remove());
-        }//------------> O(n)
-        System.out.println(q);
-        //* Reverse the queue
-        while (q.size()!=0) {
-            st.push(q.remove());
-        }
-        while (st.size()!=0){
-            q.add(st.pop());
-        }//------------->O(n)
-        System.out.println(q);
-    }
-
+   
     public static int[] printArrFirstNegInteger(int arr[], int n, int k) {
         int res[] = new int[n - k + 1];
         Queue<Integer> q = new LinkedList<>();
@@ -88,6 +44,57 @@ public class Queue_04 {
         return res;
     }
 
+    public static void reorderQueue(){
+        System.out.println();
+        System.out.println("<==========Reorder Queue===========>");
+        Queue<Integer> q = new LinkedList<>();
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+        q.add(5);
+        q.add(6);
+        q.add(7);
+        q.add(8);
+        System.out.println(q);
+        Stack<Integer> st = new Stack<>();
+        int n = q.size();
+        for (int i = 1; i <=n/2; i++) {
+            st.push(q.remove());
+        }//5 6 7 8               top 4 3 2 1
+        //* -----------> O(n/2)
+        System.out.println(q);
+        System.out.println(st);
+        while (st.size()>0) {
+            q.add(st.pop());
+        }//5 6 7 8 4 3 2 1
+        //* ------------> O(n)
+        System.out.println(q);
+        for (int i = 1; i <=n/2; i++) {
+            st.push(q.remove());
+        }// 4 3 2 1       top 8 7 6 5
+        //* -------------> O(n/2)
+        System.out.println(q);
+        System.out.println(st);
+
+        while (st.size()>0) {
+            q.add(st.pop());
+            q.add(q.remove());
+        }//8 4 7 3 6 2 5 1
+        //* ------------> O(n)
+        System.out.println(q);
+        //* Reverse the queue
+        while (q.size()>0) {
+            st.push(q.remove());
+        }
+        while (st.size()>0){
+            q.add(st.pop());
+        }
+        //1 5 2 6 3 7 4 8
+        //* ------------->O(n)
+        System.out.println(q);
+    }
+
     public static void main(String[] args) {
         //! Ques : Find First negative in each window size k
         //* Approch 1: 
@@ -107,5 +114,6 @@ public class Queue_04 {
 
         //! Ques : Reorder queue ( interleave 1st half with 2nd half)
         reorderQueue();
+        //? Time Complexity : O(n)
     }
 }
