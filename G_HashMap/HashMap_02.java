@@ -1,7 +1,103 @@
 package G_HashMap;
 import java.util.*;
 
+
 public class HashMap_02 {
+    static class HashTable {
+        private static final int INITIAL_SIZE = 10;
+        private static final double LOAD_FACTOR_THRESHOLD = 0.7;
+        private Integer[] table;
+        private int size;
+    
+        public HashTable() {
+            table = new Integer[INITIAL_SIZE];
+            size = 0;
+        }
+    
+        private int hash(int key) {
+            return key % table.length;
+        }
+    
+        private void resize() {
+            Integer[] oldTable = table;
+            table = new Integer[oldTable.length * 2];
+            size = 0;
+    
+            for (Integer key : oldTable) {
+                if (key != null) {
+                    insert(key);
+                }
+            }
+        }
+    
+        public void insert(int key) {
+            if ((double) size / table.length > LOAD_FACTOR_THRESHOLD) {
+                resize();
+            }
+    
+            int index = hash(key);
+            while (table[index] != null && !table[index].equals(key)) {
+                index = (index + 1) % table.length;
+            }
+            if (table[index] == null) {
+                size++;
+            }
+            table[index] = key;
+        }
+    
+        public boolean search(int key) {
+            int index = hash(key);
+            int startIndex = index;
+    
+            while (table[index] != null) {
+                if (table[index].equals(key)) {
+                    return true;
+                }
+                index = (index + 1) % table.length;
+                if (index == startIndex) {
+                    break;
+                }
+            }
+            return false;
+        }
+    
+        public void delete(int key) {
+            int index = hash(key);
+            int startIndex = index;
+    
+            while (table[index] != null) {
+                if (table[index].equals(key)) {
+                    table[index] = null;
+                    size--;
+                    rehashFromIndex(index);
+                    return;
+                }
+                index = (index + 1) % table.length;
+                if (index == startIndex) {
+                    break;
+                }
+            }
+        }
+    
+        private void rehashFromIndex(int startIndex) {
+            int index = (startIndex + 1) % table.length;
+    
+            while (table[index] != null) {
+                Integer key = table[index];
+                table[index] = null;
+                size--;
+                insert(key);
+                index = (index + 1) % table.length;
+            }
+        }
+    
+        public void printTable() {
+            for (int i = 0; i < table.length; i++) {
+                System.out.println("Index " + i + ": " + table[i]);
+            }
+        }
+    }
+
     static class MyHashMap<K, V> {
         public static final int DEFAULT_CAPACITY =4;
         public static final float DEFAULT_LOAD_FACTOR = 0.75f;
@@ -64,6 +160,7 @@ public class HashMap_02 {
         public int capacity(){
             return buckets.length;
         }
+        
         public void put(K key, V value){
             int bi = HashFunc(key);//claculate slot index for Key like 3
             LinkedList<Node>  currBucket = buckets[bi];//bukets[bi] means to reached at particular slot in hash table and access Linked list at currBucket   1-->2-->4--->3-->5 (bucket list )
@@ -109,10 +206,12 @@ public class HashMap_02 {
                 return null;
             }
         }
-
     }
 
     public static void main(String[] args) {
+        //! Implementaion of hash table using Open hashing 
+
+        System.out.println("<=============Implementaion of hash table using Open hashing================>");
         MyHashMap<String, Integer> mp = new MyHashMap<>();
         System.out.println("Testing put");
         mp.put("a", 1);
@@ -133,5 +232,32 @@ public class HashMap_02 {
         //? NOTE : If you add more value in hashMap then it leads to increase time complextiy so we use Rehashing concept for constant Time Complexity (for Optimization)
 
         System.out.println("CAPACITY "+mp.capacity());
+
+
+
+
+        //! Implementaion of hash table using Closed hashing  with linear probing
+        HashTable hashTable = new HashTable();
+        System.out.println("<=====Implementaion of hash table using Closed hashing with linear probing======>");
+        System.out.println();
+        hashTable.insert(10);
+        hashTable.insert(20);
+        hashTable.insert(30);
+        hashTable.insert(40);
+        hashTable.insert(50);
+        
+        System.out.println("Hash Table:");
+        hashTable.printTable();
+
+        System.out.println("Search 20: " + hashTable.search(20));
+        System.out.println("Search 25: " + hashTable.search(25));
+
+        hashTable.delete(20);
+        System.out.println();
+        System.out.println("After deleting 20:");
+        hashTable.printTable();
+        
+        System.out.println("Search 20: " + hashTable.search(20));
+    
     }
 }
