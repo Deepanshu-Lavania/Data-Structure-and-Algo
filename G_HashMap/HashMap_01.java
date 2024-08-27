@@ -12,7 +12,7 @@ public class HashMap_01 {
             }else{
                 amp.put(arr[i],amp.get(arr[i])+1);//get used to take value
             }
-        } 
+        } //----------->O(n)
         System.out.println(amp);
 
         int maxFreq= -1;
@@ -22,7 +22,7 @@ public class HashMap_01 {
                 maxFreq=e.getValue();
                 ansKey=e.getKey();
             }
-        }
+        }//----------->O(n)
         System.out.printf(" %d has max frequency and it occurs %d times",ansKey,maxFreq);
     }
     public static void main(String[] args) {
@@ -68,7 +68,6 @@ public class HashMap_01 {
     
         //! Ques : Given an array , find the most frequent element in it. If there are multiple elements that appear a maximum number of times, print any one of
         maxRepEle();
-        
-        
+        //? Time complexity --> O(n)  
     }
 }
