@@ -46,6 +46,24 @@ public class HashMap_02 {
         public int size(){//return the number of entries in map
             return n;
         }
+        
+        private void rehash(){
+            LinkedList<Node>[] oldBuckets= buckets;//copy hash table array into another 
+            n=0;//reset the size to 0 because we'll re-insert all nodes
+            initBuckets(2*oldBuckets.length);
+            for (int i = 0; i < oldBuckets.length; i++) {
+                LinkedList<Node> bucket =oldBuckets[i];
+                for (int j = 0; j < bucket.size(); j++) {
+                    Node node= bucket.get(j);
+                    put(node.key, node.value);
+                }
+            }
+
+        }
+
+        public int capacity(){
+            return buckets.length;
+        }
         public void put(K key, V value){
             int bi = HashFunc(key);//claculate slot index for Key like 3
             LinkedList<Node>  currBucket = buckets[bi];//bukets[bi] means to reached at particular slot in hash table and access Linked list at currBucket   1-->2-->4--->3-->5 (bucket list )
@@ -57,6 +75,11 @@ public class HashMap_02 {
             }else{//update case
                 Node currNode = currBucket.get(ei);
                 currNode.value=value;
+            }
+
+            //?Rehashing : For Optimization only
+            if (n>= buckets.length*DEFAULT_LOAD_FACTOR) {
+                rehash();
             }
         }
         public V get(K key){
@@ -106,5 +129,9 @@ public class HashMap_02 {
         mp.remove("d");
         System.out.println("Testing size "+mp.size());
         System.out.println(mp.remove("College"));
+
+        //? NOTE : If you add more value in hashMap then it leads to increase time complextiy so we use Rehashing concept for constant Time Complexity (for Optimization)
+
+        System.out.println("CAPACITY "+mp.capacity());
     }
 }
