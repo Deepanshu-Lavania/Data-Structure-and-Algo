@@ -102,12 +102,12 @@ public class HashMap_03 {
                 if (mp.get(sch)!=tch) {
                     return false;
                 }
-            }else if (mp.containsValue(tch)) {
+            }else if (mp.containsValue(tch)) {//? containsValue in hash map has Linear Time Compleixty //O(n)
                 return false;
             }else{
                 mp.put(sch, tch);
             }
-        }
+        }//O(n)
         
         return true;
     }
@@ -130,6 +130,7 @@ public class HashMap_03 {
 
         //! Ques:Are two Strings isomorphic 
         System.out.println("<======Check Strings are isomorphic =======>");
-        System.out.println(        isIsomorphic("abacd","xyxzx")        );
+        System.out.println(isIsomorphic("abacd","xyxzx"));
+        //Time Complexty is O(n^2)
     }
 }
