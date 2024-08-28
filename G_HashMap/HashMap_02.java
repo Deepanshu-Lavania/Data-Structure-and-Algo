@@ -37,7 +37,7 @@ public class HashMap_02 {
     
             int index = hash(key);
             while (table[index] != null && !table[index].equals(key)) {
-                index = (index + 1) % table.length;
+                index = (index + 1) % table.length;//! linear probing
             }
             if (table[index] == null) {
                 size++;
