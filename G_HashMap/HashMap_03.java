@@ -102,7 +102,7 @@ public class HashMap_03 {
                 if (mp.get(sch)!=tch) {
                     return false;
                 }
-            }else if (mp.containsValue(tch)) {//? containsValue in hash map has Linear Time Compleixty //O(n)
+            }else if (mp.containsValue(tch)) {//? containsValue in hash map has Linear Time Compleixty //O(n) but we can do this in constant time by using HASHSET 
                 return false;
             }else{
                 mp.put(sch, tch);
@@ -110,6 +110,35 @@ public class HashMap_03 {
         }//O(n)
         
         return true;
+    }
+    public static int[] pairIdxSum(int arr[],int target){
+        int[] ans ={-1};//to pass an pair of index 
+        HashMap<Integer,Integer> mp = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            int partner = target - arr[i];
+            if (mp.containsKey(partner)) {
+                ans = new int[]{i, mp.get(partner)};//* Imp: pass pair in array
+                return ans;
+            }
+            mp.put(arr[i],i);
+        }
+        System.out.println(mp);
+        return ans;
+    }
+    public static void subaryLen(int arr[]){
+        HashMap<Integer,Integer> mp = new HashMap<>();
+        int preifxSum = 0;
+        int maxLen =0;
+        mp.put(0,-1);
+        for (int i = 0; i < arr.length; i++) {
+            preifxSum +=arr[i];
+            if (mp.containsKey(preifxSum)) {
+                maxLen = Math.max(maxLen, i-mp.get(preifxSum));
+            }else{
+                mp.put(preifxSum, i);
+            }   
+        }
+        System.out.println(maxLen);
     }
     public static void main(String args[]){
         //! Quse :(Valid Anagram) Check whether two Strings are anagram of each other. Return true if they are else false. An anagram  of a string is another string that contains the same characters, only the order of characters can be different . For ex: "abcd" and "dabc" are an anagram of each other.
@@ -132,5 +161,19 @@ public class HashMap_03 {
         System.out.println("<======Check Strings are isomorphic =======>");
         System.out.println(isIsomorphic("abacd","xyxzx"));
         //Time Complexty is O(n^2)
+
+        //! Ques: Given an array of length and a target, return a pair(indices) whose sum is eqaul to the target. If there is no pair present , return -1
+        System.out.println("<=======pairSum whose sum is target=========>");
+        int arr[] = {14,7,10,4,5,9,1,2};
+        int a[]=pairIdxSum(arr,13);
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]+" ");
+        }
+        System.out.println();
+
+        //! Ques : Find largest subarray whose sum is equal to Zero
+        System.out.println("<========Find largest subarray whose sum is equal to Zero=======>");
+        int aray[] ={15,-2,2,-8,1,7,10};
+        subaryLen(aray);
     }
 }
