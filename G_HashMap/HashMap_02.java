@@ -111,17 +111,17 @@ public class HashMap_02 {
         }
 
         private int n;//the number of entries in map
-        private LinkedList<Node>[] buckets;//intialize bucket array
+        private LinkedList<Node> buckets[];//*LinkedList<Node>: This indicates that each element in the array buckets is a LinkedList that stores elements of type Node. The Node class would be a custom class
 
         private void initBuckets(int N){
-            buckets = new LinkedList[N];//initialization is at above
+            buckets = new LinkedList[N];//initialization is at above of buckets array
             for (int i = 0; i < buckets.length; i++) {
                 buckets[i] =new LinkedList<>();//at each slot, intialize empty Linked list
             }
         }
         //To initialize the hash table
         public MyHashMap(){//constructor which execute first
-            initBuckets(DEFAULT_CAPACITY);//fucntion becuase we have to call it again for new bucket array
+            initBuckets(DEFAULT_CAPACITY);
         }
 
         //Traverse the ll and looks for a node with key, if found it returns it's index otherwise it return null
@@ -148,9 +148,9 @@ public class HashMap_02 {
             n=0;//reset the size to 0 because we'll re-insert all nodes
             initBuckets(2*oldBuckets.length);
             for (int i = 0; i < oldBuckets.length; i++) {
-                LinkedList<Node> bucket =oldBuckets[i];
-                for (int j = 0; j < bucket.size(); j++) {
-                    Node node= bucket.get(j);
+                LinkedList<Node> bucketList =oldBuckets[i];
+                for (int j = 0; j < bucketList.size(); j++) {
+                    Node node= bucketList.get(j);
                     put(node.key, node.value);
                 }
             }
@@ -166,10 +166,10 @@ public class HashMap_02 {
             LinkedList<Node>  currBucket = buckets[bi];//bukets[bi] means to reached at particular slot in hash table and access Linked list at currBucket   1-->2-->4--->3-->5 (bucket list )
             int ei = searchInBucket(currBucket, key);
             if (ei== -1) {//key doesn't exist, we have to insert a new node
-                Node node= new Node(key,value);
+                Node node= new Node(key,value);//? Node constructor used here to initialize the node
                 currBucket.add(node);
                 n++;//increase size
-            }else{//update case
+            }else{//update case when value exist
                 Node currNode = currBucket.get(ei);
                 currNode.value=value;
             }
@@ -181,8 +181,8 @@ public class HashMap_02 {
         }
         public V get(K key){
             int bi=HashFunc(key);
-            LinkedList<Node> currBucket = buckets[bi];
-            int ei = searchInBucket(currBucket, key);
+            LinkedList<Node> currBucket = buckets[bi];//get index in bucket array
+            int ei = searchInBucket(currBucket, key);//get index of Linked List in particular linked list for one slot in bucket array
             if (ei!=-1) {
                 Node currNode  = currBucket.get(ei);
                 return currNode.value;
