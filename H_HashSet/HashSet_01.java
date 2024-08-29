@@ -18,9 +18,10 @@ public class HashSet_01 {
         System.out.println(st.size());
         st.add("Deepak");
         System.out.println(st);
+
+//? NOTE:  In Java, the HashSet class does not provide a way to access elements by index, which is why you can't use a traditional for loop with an index to iterate through a HashSet. However, you can use an enhanced for loop (also known as a "for-each" loop) to iterate over the elements in a HashSet.
         for (String s : st) {
             System.out.print(s+" ");
         }
-
     }
 }
