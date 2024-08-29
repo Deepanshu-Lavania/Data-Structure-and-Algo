@@ -14,7 +14,7 @@ public class HashSet_02 {
             if (!st.contains(num - 1)) {// num sis starting point of sequence
                 int currNum = num;
                 int currLen = 1;
-                while (st.contains(currNum + 1)) {//* it will not affect to for loop n times, this runs only when it contains next greateer element so this time complexity is O(1)
+                while (st.contains(currNum + 1)) {//* it will not affect to for loop n times, this runs only when it contains next greateer element so this time complexity is O(1) beacuse while loop not touch the smaller element from start num in for loop therefore T.C is O(n)
                     currLen++;
                     currNum++;
                 }
