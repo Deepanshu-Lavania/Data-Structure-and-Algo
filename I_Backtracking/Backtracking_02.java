@@ -83,14 +83,16 @@ public class Backtracking_02 {
 
         //! Ques: Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
         System.out.println();
-        System.out.println("<====return all the possible permutations of array====>");
+        System.out.println("<==== permutations of array Using boolean array====>");
         int arr[]={1,2,3};
         //? Approch 1:
         List<List<Integer>> ans = permute(arr);
         System.out.println(ans);
 
         //? Approch 2:
+        System.out.println("<==== permutations of array Using Swapping====>");
         List<List<Integer>> arrList=permutation(arr);
         System.out.println(arrList);
+        // The second approach (swapping) is generally considered better for generating permutations in terms of both space efficiency and simplicity.
     }
 }
