@@ -88,11 +88,13 @@ public class Backtracking_02 {
         //? Approch 1:
         List<List<Integer>> ans = permute(arr);
         System.out.println(ans);
+        //? Time complexity : O(n!*n) = O(n!)
 
         //? Approch 2:
         System.out.println("<==== permutations of array Using Swapping====>");
         List<List<Integer>> arrList=permutation(arr);
         System.out.println(arrList);
+        //? Time complexity : O(n!*n) = O(n!)
         // The second approach (swapping) is generally considered better for generating permutations in terms of both space efficiency and simplicity.
     }
 }
