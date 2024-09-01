@@ -66,7 +66,6 @@ public class Backtracking_03 {
             }
         }
     }
-
     public static void nqueenList(char board[][], int row, List<List<String>> ans) {
         int n = board.length;
         // base condition
@@ -143,7 +142,6 @@ public class Backtracking_03 {
 
         return false;
     }
-
     public static boolean checkValidKnight(int grid[][]) {
         if (grid[0][0] != 0)
             return false;
@@ -197,9 +195,7 @@ public class Backtracking_03 {
             return false;
         return true;
     }
-
     static int maxKnights = 0;
-
     public static void placedKnight(char arr[][], int row, int col, int number) {
         int n = arr.length;
         // Base condition: End of rows
@@ -283,13 +279,11 @@ public class Backtracking_03 {
         int d =3;
         char[][] arr = new char[d][d];
         int number = 0;
-
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
                 arr[i][j] = 'x';
             }
         }
-
         placedKnight(arr, 0, 0, number);
         System.out.println("Maximum number of knights that can be placed: " + maxKnights);
     }
