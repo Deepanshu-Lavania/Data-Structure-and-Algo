@@ -105,6 +105,26 @@ public class Backtracking_01 {
         int count = countWaysMaze(1, 1, row, col);
         System.out.println("total number of ways : " + count);
 
+// Start at (1,1)
+//  ├─ Down to (2,1)
+//  │    ├─ Down to (3,1)
+//  │    │    └─ Right to (3,2)
+//  │    │         └─ Right to (3,3) [1 way]
+//  │    └─ Right to (2,2)
+//  │         ├─ Down to (3,2)
+//  │         │    └─ Right to (3,3) [1 way]
+//  │         └─ Right to (2,3)
+//  │              └─ Down to (3,3) [1 way]
+//  └─ Right to (1,2)
+//       ├─ Down to (2,2)
+//       │    ├─ Down to (3,2)
+//       │    │    └─ Right to (3,3) [1 way]
+//       │    └─ Right to (2,3)
+//       │         └─ Down to (3,3) [1 way]
+//       └─ Right to (1,3)
+//            └─ Down to (2,3)
+//                 └─ Down to (3,3) [1 way]
+
         System.out.println("<======Print ways in maze using two direction======>");
         printCountWaysMaze(1, 1, row, col, "");
 
