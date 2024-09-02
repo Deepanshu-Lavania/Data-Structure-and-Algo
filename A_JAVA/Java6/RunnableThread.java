@@ -1,4 +1,4 @@
-package Java6;
+package A_JAVA.Java6;
 
 class CustomThread implements Runnable {
     public void run() {

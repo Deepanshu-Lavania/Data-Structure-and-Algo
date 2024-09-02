@@ -1,4 +1,4 @@
-package Java3;
+package A_JAVA.Java3;
 class Person{
     private String name;
     private int age;

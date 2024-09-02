@@ -1,4 +1,4 @@
-package Java1;
+package A_JAVA.Java1;
 
 public class First {
     public static void main(String args[]){

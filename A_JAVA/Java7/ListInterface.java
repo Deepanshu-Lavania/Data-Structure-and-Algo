@@ -1,4 +1,4 @@
-package Java7;
+package A_JAVA.Java7;
 
 import java.util.*;
 

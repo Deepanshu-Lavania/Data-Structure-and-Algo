@@ -1,4 +1,4 @@
-package Java5;
+package A_JAVA.Java5;
 
 import java.util.Scanner;
 import java.util.regex.*;

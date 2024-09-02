@@ -1,4 +1,4 @@
-package Java4;
+package A_JAVA.Java4;
 
 public class Account {
     String name;

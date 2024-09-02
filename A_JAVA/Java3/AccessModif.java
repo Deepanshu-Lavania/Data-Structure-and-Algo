@@ -1,4 +1,4 @@
-package Java3;
+package A_JAVA.Java3;
 class Account{
     public String name;
     protected String email;

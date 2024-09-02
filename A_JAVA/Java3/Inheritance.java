@@ -1,4 +1,4 @@
-package Java3;
+package A_JAVA.Java3;
 
 //! Multilevel Inheritance
 /* class Animal {

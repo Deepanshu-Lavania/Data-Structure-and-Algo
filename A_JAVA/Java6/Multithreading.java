@@ -1,4 +1,4 @@
-package Java6;
+package A_JAVA.Java6;
 
 class customThread extends Thread{
     public  void run(){
