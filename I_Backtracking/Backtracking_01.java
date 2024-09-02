@@ -4,7 +4,7 @@ public class Backtracking_01 {
     public static int countWaysMaze(int startRow, int startCol, int endRow, int endCol) {
         if (startRow > endRow || startCol > endCol)
             return 0;
-        if (startRow == endRow && endRow == endCol)
+        if (startRow == endRow && startCol == endCol)
             return 1;
         int downways = countWaysMaze(startRow + 1, startCol, endRow, endCol);
         int rightways = countWaysMaze(startRow, startCol + 1, endRow, endCol);
