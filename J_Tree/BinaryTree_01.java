@@ -141,7 +141,7 @@ Return Node 3 to Node 2 as its right child. */
 
         //! Ques : Inorder Traversal :Left, Root Subtree , Right Subtree
         System.out.println();
-        System.out.println("<=====Preorder Traversal=====>");
+        System.out.println("<=====Inorder Traversal=====>");
         inOrder(root);
         //! Ques : PostOrder Traversal :Left,  Right Subtree,Root Subtree 
         System.out.println();
