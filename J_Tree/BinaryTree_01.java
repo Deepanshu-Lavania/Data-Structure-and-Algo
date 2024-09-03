@@ -1,4 +1,5 @@
 package J_Tree;
+import java.util.*;
 
 public class BinaryTree_01 {
     public static class Node{
@@ -12,7 +13,6 @@ public class BinaryTree_01 {
             this.rightNode=null;
         }
     }
-
     public static class BinaryTree{
         static int idx=-1;
         Node buildTree(int node[]){
@@ -34,8 +34,63 @@ public class BinaryTree_01 {
         }
     }
 
+    public static void preorder(Node root){
+        if (root == null) {
+            System.out.print(-1+" ");
+            return;
+        }
+        System.out.print(root.val+" ");
+        preorder(root.leftNode);
+        preorder(root.rightNode);
+    }
+    public static void inOrder(Node root){
+        if (root == null) {
+            System.out.print(-1+" ");
+            return;
+        }
+        preorder(root.leftNode);
+        System.out.print(root.val+" ");
+        preorder(root.rightNode);
+    }
+    public static void postOrder(Node root){
+        if (root == null) {
+            System.out.print(-1+" ");
+            return;
+        }
+        postOrder(root.leftNode);
+        postOrder(root.rightNode);
+        System.out.print(root.val+" ");
+    }
+    public static void levelOrder(Node root){
+        if(root==null) return;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+        while (!q.isEmpty()) {
+            Node curNode = q.remove();
+            if(curNode==null){
+                System.out.println();
+                if (q.isEmpty()) {
+                    break;
+                }else{
+                    q.add(null);
+                }
+            }else{
+                System.out.print(curNode.val+" ");
+                if (curNode.leftNode!=null) {
+                    q.add(curNode.leftNode);
+                }
+                if(curNode.rightNode!=null){
+                    q.add(curNode.rightNode);
+                }
+            }
+        }
+        
+    }
     public static void main(String[] args) {
-        int nodes[]={2,1,3,-1,-1,5,-1,-1,3,-1,6,-1,-1};
+        //! Ques : Build the Binary tree Preorder
+        System.out.println("<=====Build the Binary tree Preorder=====>");
+        int nodes[]={2,1,3,-1,-1,5,-1,-1,8,-1,6,-1,-1};
 /*         //*Building the Left Subtree of Node 2 (Steps Already Covered):
 idx = 1: Create Node 1.
 idx = 2: Create Node 3 (left child of Node 1).
@@ -58,5 +113,25 @@ Return Node 3 to Node 2 as its right child. */
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
         System.out.println("The root node of the Binary Tree is : "+root.val);
+
+        //! Ques : Preorder Traversal : Root ,Left Subtree , Right Subtree
+        System.out.println("<=====Preorder Traversal=====>");
+        preorder(root);
+
+        //! Ques : Inorder Traversal :Left, Root Subtree , Right Subtree
+        System.out.println();
+        System.out.println("<=====Preorder Traversal=====>");
+        inOrder(root);
+        //! Ques : PostOrder Traversal :Left,  Right Subtree,Root Subtree 
+        System.out.println();
+        System.out.println("<=====Postorder Traversal=====>");
+        postOrder(root);
+        //! Ques : LevelOrder Traversal :Left,  Right Subtree,Root Subtree 
+        System.out.println();
+        System.out.println("<=====Levelorder Traversal=====>");
+        levelOrder(root);
+
+
+
     }
 }
