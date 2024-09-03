@@ -87,6 +87,27 @@ public class BinaryTree_01 {
         }
         
     }
+
+    public static int countNode(Node root){
+        if (root==null) {
+            return 0;
+        }
+        int leftnodes =countNode(root.leftNode);
+        int rightnodes = countNode(root.rightNode);
+        
+        return leftnodes+rightnodes+1;
+    }
+
+    public static  int sumNodes(Node root){
+        if (root==null) {
+            return 0;
+        }
+        int leftnodes =sumNodes(root.leftNode);
+        int rightnodes = sumNodes(root.rightNode);
+        
+        return leftnodes+rightnodes+root.val;
+    }
+
     public static void main(String[] args) {
         //! Ques : Build the Binary tree Preorder
         System.out.println("<=====Build the Binary tree Preorder=====>");
@@ -131,7 +152,11 @@ Return Node 3 to Node 2 as its right child. */
         System.out.println("<=====Levelorder Traversal=====>");
         levelOrder(root);
 
+        System.out.println("<=====Number of Nodes=====>");
+        System.out.println("Number of nodes are : "+countNode(root));
 
-
+        System.out.println("<=====Sum of Nodes ======>");
+        System.out.println("Sum of nodes are : "+sumNodes(root));
+        // sumNodes(root);
     }
 }
