@@ -28,19 +28,11 @@ public class BinaryTree_02 {
             return newNode;
         }
     }
-    public static void inOrder(Node root){
-        if (root == null) {
-            System.out.print(-1+" ");
-            return;
-        }
-        inOrder(root.leftNode);
-        System.out.print(root.val+" ");
-        inOrder(root.rightNode);
-    }
+
 
     public static void main(String[] args) {
         BinaryTrees tree = new BinaryTrees();
-        int node[] = {1, 2, 3, -1, -1, 4, 5, -1, 6, -1, -1, 7, 8, -1, -1, 9, -1, -1};
+        int node[] = { 1, 2, 3, -1, -1, 4, -1, -1, 5, 6, -1, -1, 7, 8, -1, 9, 10, -1, -1 };
 
         Node root = tree.buildTrees(node);
         if (root != null) {
@@ -48,10 +40,6 @@ public class BinaryTree_02 {
         } else {
             System.out.println("The tree is empty.");
         }
-        //! Ques : Inorder Traversal :Left, Root Subtree , Right Subtree
-        System.out.println();
-        System.out.println("<=====Preorder Traversal=====>");
-        inOrder(root);
     }
-    
+
 }

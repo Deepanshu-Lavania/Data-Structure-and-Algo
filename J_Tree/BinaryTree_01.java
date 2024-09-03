@@ -108,6 +108,20 @@ public class BinaryTree_01 {
         return leftnodes+rightnodes+root.val;
     }
 
+    public static int maxHeight(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftheight = maxHeight(root.leftNode);
+        int rightheight = maxHeight(root.rightNode);
+        // int treeheight = Math.max(leftheight, rightheight)+1;
+        // return treeheight;
+        if (leftheight > rightheight) {
+            return leftheight + 1;
+        } else {
+            return rightheight + 1;
+        }
+    }
     public static void main(String[] args) {
         //! Ques : Build the Binary tree Preorder
         System.out.println("<=====Build the Binary tree Preorder=====>");
@@ -159,5 +173,9 @@ Return Node 3 to Node 2 as its right child. */
         //! Ques : Sum of nodes in a Tree
         System.out.println("<=====Sum of Nodes ======>");
         System.out.println("Sum of nodes are : "+sumNodes(root));
+
+        // ! Ques : Calculate maximum height
+        System.out.println("<===== Calculate maximum height=====>");
+        System.out.println(maxHeight(root));
     }
 }
