@@ -48,9 +48,9 @@ public class BinaryTree_01 {
             System.out.print(-1+" ");
             return;
         }
-        preorder(root.leftNode);
+        inOrder(root.leftNode);
         System.out.print(root.val+" ");
-        preorder(root.rightNode);
+        inOrder(root.rightNode);
     }
     public static void postOrder(Node root){
         if (root == null) {
@@ -124,12 +124,12 @@ idx = 7: Encounter -1, set Node 5's right child to null.
 Return Node 5 to Node 1 as its right child.
           //*Building the Right Subtree of Node 2 (This is Key):
 After completing the left subtree for Node 2 (which includes Node 1 and its children 3 and 5):
-idx = 8: Create Node 3 (right child of Node 2).
-idx = 9: Encounter -1, set Node 3's left child to null.
-idx = 10: Create Node 6 (right child of this Node 3).
+idx = 8: Create Node 8 (right child of Node 2).
+idx = 9: Encounter -1, set Node 8's left child to null.
+idx = 10: Create Node 6 (right child of this Node 8).
 idx = 11: Encounter -1, set Node 6's left child to null.
 idx = 12: Encounter -1, set Node 6's right child to null.
-Return Node 6 to Node 3 as its right child.
+Return Node 6 to Node 8 as its right child.
 Return Node 3 to Node 2 as its right child. */
         BinaryTree tree = new BinaryTree();
         Node root = tree.buildTree(nodes);
