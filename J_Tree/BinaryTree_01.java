@@ -152,11 +152,12 @@ Return Node 3 to Node 2 as its right child. */
         System.out.println("<=====Levelorder Traversal=====>");
         levelOrder(root);
 
+        //! Ques : Number of nodes in a Tree 
         System.out.println("<=====Number of Nodes=====>");
         System.out.println("Number of nodes are : "+countNode(root));
 
+        //! Ques : Sum of nodes in a Tree
         System.out.println("<=====Sum of Nodes ======>");
         System.out.println("Sum of nodes are : "+sumNodes(root));
-        // sumNodes(root);
     }
 }
