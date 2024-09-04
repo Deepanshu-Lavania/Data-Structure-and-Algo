@@ -118,7 +118,7 @@ public class BinaryTree_01 {
         // return treeheight;
         if (leftheight > rightheight) {
             return leftheight + 1;
-        } else {
+        } else { 
             return rightheight + 1;
         }
     }
