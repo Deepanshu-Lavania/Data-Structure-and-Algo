@@ -102,7 +102,7 @@ public class BinaryTree_02 {
         TreeInfo myInfo = new TreeInfo(myHeight, mydiam);
         return myInfo;
     }
-
+    
     public static boolean isIdentical(Node root, Node subroot) {
         if (root == null && subroot == null) {
             return true;
@@ -196,7 +196,7 @@ public class BinaryTree_02 {
         checkSubtree(root, subroot);
         System.out.println(checkSubtree(root, subroot));
 
-        System.out.println();
+        //! Ques : Sum of node at any Level in tree"
         System.out.println("<=====Levelorder Sum=====>");
         int k=3;
         int sum =levelSum(subroot,k);
