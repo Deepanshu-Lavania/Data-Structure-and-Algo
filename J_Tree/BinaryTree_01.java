@@ -176,6 +176,11 @@ Return Node 3 to Node 2 as its right child. */
 
         // ! Ques : Calculate maximum height
         System.out.println("<===== Calculate maximum height=====>");
-        System.out.println(maxHeight(root));
+        System.out.println(maxHeight(root)); 
+        
+
+
+
+        //? In Above all Ques , Time complexity is O(n) because of each node  traverse atmost one time
     }
 }
