@@ -71,7 +71,8 @@ public class BinaryTree_02 {
         return Math.max(Diam3, Math.max(Diam1, Diam2));
     }
 
-    public static class TreeInfo {// this class is used so that we can return two data
+    public static class TreeInfo {
+        //?The TreeInfo class is used in code to optimize the calculation of the diameter of the tree by allowing you to return multiple values (both height and diameter) in a single function call, rather than calculating these values separately. This improves efficiency by avoiding redundant computations.
         int ht;
         int diam;
 
@@ -201,6 +202,7 @@ public class BinaryTree_02 {
         int k=3;
         int sum =levelSum(subroot,k);
         System.out.println("The sum of tree at level "+k +" is "+sum);
+        System.out.println(diameter2(subroot).diam);
     }
 
 }
