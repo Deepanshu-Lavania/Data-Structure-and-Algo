@@ -1,5 +1,7 @@
 package J_Tree;
 
+import java.util.ArrayList;
+
 public class BSearchTree_03 {
 
     public static class Node{
@@ -108,6 +110,29 @@ public class BSearchTree_03 {
             printRangeNode(root.leftNode, x, y);
         }
     }
+    public static void printPath(ArrayList<Integer> list){
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i)+"-->");
+        }
+        System.out.println();
+    }
+
+    public static void pathRootLeaf(Node root,ArrayList<Integer> list){
+        
+        if (root==null) {
+            return;
+        }
+        list.add(root.val);
+        if (root.leftNode==null && root.rightNode==null) {
+            printPath(list);
+        }else{
+            pathRootLeaf(root.leftNode,list);
+            pathRootLeaf(root.rightNode,list);
+        }
+        // list.remove(root.val); //don't do this
+        list.remove(list.size()-1);
+
+    }
     public static void main(String[] args) {
         BSTree bst = new BSTree();
         int arr[]={5,1,3,4,2,7};
@@ -129,8 +154,6 @@ public class BSearchTree_03 {
         }else{
             System.out.println("key not found");
         }
-
-
         //! Ques : Deletion in BST 
         System.out.println("<=====Deletion in BST=======>");
         delete(root,5);
@@ -140,5 +163,15 @@ public class BSearchTree_03 {
         //! Ques : Print node in given range
         System.out.println("<=======Print values of nodes in given range=======>");
         printRangeNode(root,2,6);
+
+
+        //! Ques: print all Paths Root to leaf 
+        System.out.println();
+        System.out.println("<=========print all Paths Root to leaf========>");
+        inorder(root);
+        System.out.println();
+        System.out.println(root.val);
+        ArrayList<Integer> list =new ArrayList<>();
+        pathRootLeaf(root,list);
     }
 }
