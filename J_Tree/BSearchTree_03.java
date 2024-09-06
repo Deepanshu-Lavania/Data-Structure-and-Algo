@@ -93,6 +93,21 @@ public class BSearchTree_03 {
         return root;
     }
     
+    public static void printRangeNode(Node root, int x, int y){
+        if (root==null) {
+            return;
+        }
+        if (root.val>=x && root.val<=y) {
+            printRangeNode(root.leftNode, x, y);
+            System.out.print(root.val+" ");
+            printRangeNode(root.rightNode, x, y);
+        }
+        else if (root.val<x) {
+            printRangeNode(root.rightNode, x, y);
+        }else{
+            printRangeNode(root.leftNode, x, y);
+        }
+    }
     public static void main(String[] args) {
         BSTree bst = new BSTree();
         int arr[]={5,1,3,4,2,7};
@@ -120,6 +135,10 @@ public class BSearchTree_03 {
         System.out.println("<=====Deletion in BST=======>");
         delete(root,5);
         inorder(root);
+        System.out.println();
 
+        //! Ques : Print node in given range
+        System.out.println("<=======Print values of nodes in given range=======>");
+        printRangeNode(root,2,6);
     }
 }
