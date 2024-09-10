@@ -1,11 +1,9 @@
-package J_Tree;
+package J_BinaryTree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.tree.TreeNode;
-
-public class BinaryTree_03 {
+public class BinaryTree_04 {
     public static class Node {
         Node left;
         Node right;
@@ -76,6 +74,11 @@ public class BinaryTree_03 {
     }
 
 
+    public static void printPath(List<Integer> path) {
+        for (int i = path.size() - 1; i >= 0; i--) {
+            System.out.print(path.get(i) + (i == 0 ? "\n" : " -> "));
+        }
+    }
     public static void printLeafToRoot(Node node, List<Integer> path) {
         if (node == null) return;
 
@@ -94,11 +97,7 @@ public class BinaryTree_03 {
         // Backtrack: remove the current node from the path
         path.remove(path.size() - 1);
     }
-    public static void printPath(List<Integer> path) {
-        for (int i = path.size() - 1; i >= 0; i--) {
-            System.out.print(path.get(i) + (i == 0 ? "\n" : " -> "));
-        }
-    }
+    
     public static void printLeafToRootPaths(Node root) {
         List<Integer> path = new ArrayList<>();
         printLeafToRoot(root, path);
@@ -131,6 +130,5 @@ public class BinaryTree_03 {
         //! Ques : Binary tree path leaf to root
         System.out.println("<=========Binary Tree Path leaf to root===========>");
         printLeafToRootPaths(root);
-
     }
 }

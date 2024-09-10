@@ -1,7 +1,7 @@
-package J_Tree;
+package J_BinaryTree;
 import java.util.*;
 
-public class BinaryTree_01 {
+public class BinaryTree_02 {
     public static class Node{
         Node leftNode;
         Node rightNode;
