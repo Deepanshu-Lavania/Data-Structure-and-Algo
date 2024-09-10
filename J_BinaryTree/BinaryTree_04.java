@@ -1,7 +1,6 @@
 package J_BinaryTree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BinaryTree_04 {
     public static class Node {
@@ -54,33 +53,34 @@ public class BinaryTree_04 {
         return isBalancedBTree(root.left) && isBalancedBTree(root.right);
     }
 
-
-    public static void helper(Node root,List<String> ans,String s ){
-        if(root==null){
-            return ;
-        }
-        if(root.left==null && root.right==null){
-            s=s+root.val;
-           ans.add(s);
+    public static void helper(Node root, List<String> ans, String s) {
+        if (root == null) {
             return;
         }
-        helper(root.left,ans,s+root.val+"->");
-        helper(root.right,ans,s+root.val+"->");
-    }
-    public static List<String> binaryTreePaths(Node root) {
-        List<String> ans = new ArrayList<>();
-        helper(root, ans,"");
-        return ans; 
+        if (root.left == null && root.right == null) {
+            s = s + root.val;
+            ans.add(s);
+            return;
+        }
+        helper(root.left, ans, s + root.val + "->");
+        helper(root.right, ans, s + root.val + "->");
     }
 
+    public static List<String> binaryTreePaths(Node root) {
+        List<String> ans = new ArrayList<>();
+        helper(root, ans, "");
+        return ans;
+    }
 
     public static void printPath(List<Integer> path) {
         for (int i = path.size() - 1; i >= 0; i--) {
             System.out.print(path.get(i) + (i == 0 ? "\n" : " -> "));
         }
     }
+
     public static void printLeafToRoot(Node node, List<Integer> path) {
-        if (node == null) return;
+        if (node == null)
+            return;
 
         // Add the current node to the path
         path.add(node.val);
@@ -97,10 +97,66 @@ public class BinaryTree_04 {
         // Backtrack: remove the current node from the path
         path.remove(path.size() - 1);
     }
-    
+
     public static void printLeafToRootPaths(Node root) {
         List<Integer> path = new ArrayList<>();
         printLeafToRoot(root, path);
+    }
+
+
+
+    public static Node findNode(Node root, int value) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == value) {
+            return root;
+        }
+        Node left = findNode(root.left, value);
+        if (left != null) {
+            return left;
+        }
+        return findNode(root.right, value);
+    }
+    public static boolean contains(Node root, Node node) {
+        if (root == null)
+            return false;
+        if (root == node)
+            return true;
+        return contains(root.left, node) || contains(root.right, node);
+    }
+    private static Node findLCA(Node root, Node p, Node q) {
+        // Base case: if root is null, return null
+        if (root == null) {
+            return null;
+        }
+
+        // If the current node is p or q, return it
+        if (root == p || root == q) {
+            return root;
+        }
+
+        // Recur for left and right subtrees
+        Node left = findLCA(root.left, p, q);
+        Node right = findLCA(root.right, p, q);
+
+        // If both left and right are not null, p and q are in different subtrees, root
+        // is the LCA
+        if (left != null && right != null) {
+            return root;
+        }
+
+        // If both are in the left or both are in the right subtree, return the non-null
+        // node
+        return left != null ? left : right;
+    }
+    public static Node lowestCommonAncestor(Node root, Node p, Node q) {
+        // Check if both p and q are present in the tree
+        if (!contains(root, p) || !contains(root, q)) {
+            return null; // If either is not found, return null
+        }
+        // Now perform the LCA search
+        return findLCA(root, p, q);
     }
 
     public static void main(String[] args) {
@@ -113,8 +169,8 @@ public class BinaryTree_04 {
         } else {
             System.out.println("The tree is empty.");
         }
-        
-        //! Ques : Balanced Binary Tree
+
+        // ! Ques : Balanced Binary Tree
         System.out.println("<=========Balanced Binary Tree===========>");
         isBalancedBTree(root);
         if (isBalancedBTree(root)) {
@@ -123,12 +179,24 @@ public class BinaryTree_04 {
             System.out.println("Tree is not Balanced");
         }
 
-        //! Ques : Binary tree path root to leaf
+        // ! Ques : Binary tree path root to leaf
         System.out.println("<=========Binary Tree Path root to leaf===========>");
-        List<String> l= binaryTreePaths(root);
+        List<String> l = binaryTreePaths(root);
         System.out.println(l);
-        //! Ques : Binary tree path leaf to root
+        // ! Ques : Binary tree path leaf to root
         System.out.println("<=========Binary Tree Path leaf to root===========>");
         printLeafToRootPaths(root);
+
+        // ! Ques : Find Lowest Common Ancestor
+        System.out.println("<=========Find Lowest Common Ancestor============>");
+        Node p = findNode(root, 5);
+        Node q = findNode(root, 4);
+
+        Node lca = lowestCommonAncestor(root, p, q);
+        if (lca != null) {
+            System.out.println("Lowest Common Ancestor: " + lca.val);
+        } else {
+            System.out.println("Lowest Common Ancestor not found.");
+        }
     }
 }
