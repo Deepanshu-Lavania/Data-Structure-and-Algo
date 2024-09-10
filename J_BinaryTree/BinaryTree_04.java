@@ -74,6 +74,36 @@ public class BinaryTree_03 {
         helper(root, ans,"");
         return ans; 
     }
+
+
+    public static void printLeafToRoot(Node node, List<Integer> path) {
+        if (node == null) return;
+
+        // Add the current node to the path
+        path.add(node.val);
+
+        // If it's a leaf node, print the path from leaf to root
+        if (node.left == null && node.right == null) {
+            printPath(path);
+        }
+
+        // Traverse left and right subtrees
+        printLeafToRoot(node.left, path);
+        printLeafToRoot(node.right, path);
+
+        // Backtrack: remove the current node from the path
+        path.remove(path.size() - 1);
+    }
+    public static void printPath(List<Integer> path) {
+        for (int i = path.size() - 1; i >= 0; i--) {
+            System.out.print(path.get(i) + (i == 0 ? "\n" : " -> "));
+        }
+    }
+    public static void printLeafToRootPaths(Node root) {
+        List<Integer> path = new ArrayList<>();
+        printLeafToRoot(root, path);
+    }
+
     public static void main(String[] args) {
         BinaryTrees tree = new BinaryTrees();
         int node[] = { 5, 2, 3, -1, -1, 4, -1, -1, 1, 6, -1, -1, 7, -1, -1 };
@@ -94,10 +124,13 @@ public class BinaryTree_03 {
             System.out.println("Tree is not Balanced");
         }
 
-        //! Ques : Binary tree path
-        System.out.println("<=========Binary Tree Path===========>");
+        //! Ques : Binary tree path root to leaf
+        System.out.println("<=========Binary Tree Path root to leaf===========>");
         List<String> l= binaryTreePaths(root);
         System.out.println(l);
+        //! Ques : Binary tree path leaf to root
+        System.out.println("<=========Binary Tree Path leaf to root===========>");
+        printLeafToRootPaths(root);
 
     }
 }
