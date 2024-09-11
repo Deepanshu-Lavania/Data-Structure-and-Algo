@@ -53,12 +53,12 @@ public class BinaryTree_05 {
         return isSameTree(root.left, invertTree(root.right));
     }
 
-   public static int height(Node root) {
+    public static int height(Node root) {
         if (root == null)
             return 0;
         return Math.max(height(root.left), height(root.right)) + 1;
     }
-
+    
     public static void nthLevel(Node root, int n, List<Integer> arr) {
         if (root == null) {
             return;
@@ -107,7 +107,7 @@ public class BinaryTree_05 {
             System.out.println("Tree is not Symmetric");
         }
 
-        //! Ques : Zig-Zag printing
+        //! Ques : Zig-Zag level order Traversal
 
         System.out.println("<====Zig-Zag printing using nth level====>");
         int level = height(root);
