@@ -2,6 +2,7 @@ package J_BinaryTree;
 
 import java.util.*;
 
+
 public class BinaryTree_06 {
     public static class Node {
         int val;
@@ -129,6 +130,22 @@ public class BinaryTree_06 {
         preOrder(root, arrlist ,1);
         return arrlist;
     }
+    public static Node helper(int preorder[], int prelo, int prehi,int inorder[], int inlo, int inhi){
+        if(prelo>prehi) return null;
+        Node root= new Node(preorder[prelo]);
+        
+        int i = inlo;
+        while(inorder[i]!=preorder[prelo]) i++;
+        int leftSize = i-inlo;
+        root.left= helper(preorder,prelo+1, prelo+leftSize,inorder, inlo,inlo-1);
+        root.right=helper(preorder, prelo+leftSize+1, prehi,inorder,i+1,inhi);
+        return root;
+    }
+    public static Node buildTree(int[] preorder, int[] inorder) {
+        int prhi = preorder.length-1;
+        int inhi = inorder.length-1;
+        return helper(preorder,0, prhi, inorder,0,inhi );
+    }
     public static void main(String[] args) {
         // ! Quse : Contruct tree from level order traversal
         String arr[] = {
@@ -155,5 +172,12 @@ public class BinaryTree_06 {
             System.out.print(list.get(i)+" ");
         }
 
+        //! Ques : BuildTree by using traversal of preorder and inorder
+        System.out.println();
+        System.out.println("<=======BuildTree by using traversal of preorder and inorder=========>");
+        int preorder[] = {1,2,4,5,3,6};
+        int inorder[]={4,2,5,1,3,6};
+        Node buildTreeroot = buildTree(preorder,inorder);
+        System.out.println(buildTreeroot.val);
     }
 }
