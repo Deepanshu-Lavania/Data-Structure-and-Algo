@@ -157,7 +157,7 @@ public class BinaryTree_07 {
         System.out.println("<==========Path sum II==========>");
         System.out.println("Path sum is : "+pathSumIII(root,8)); 
 
-        //! Ques : Given the root of a binary tree, flatten the tree into a "linked list" wihtout using extra space
+        //! Ques : Given the root of a binary tree, flatten the tree into a "linked list/skewed tree" wihtout using extra space
         System.out.println("<====Given the root of a binary tree, flatten the tree into a linked list====>");
         System.out.println("Right node of tree before flatten : "+root.right.val);
         flattenTree(root);
