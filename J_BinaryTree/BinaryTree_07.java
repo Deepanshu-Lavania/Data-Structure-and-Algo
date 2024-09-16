@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.swing.tree.TreeNode;
 
+import F_Queue.Queue_02.crNode;
+
 public class BinaryTree_07 {
     public static class Node {
         int val;
@@ -135,6 +137,21 @@ public class BinaryTree_07 {
         }
         return;
     }
+    public static void flatten(Node root){
+        Node curr =root;
+        while (curr.right!=null) {
+            if (curr.left!=null) {
+                Node pred = curr.left;
+                while (pred.right!=null) {
+                    pred=pred.right;
+                }
+                pred.right=curr.right;
+                curr.right=curr.left;
+                curr.left=null;
+            }
+            curr=curr.right;
+        }
+    }
     public static void main(String[] args) {
         // String arr[] = {"5", "4", "8", "11","","13","4", "7", "2","","", "5", "1"};
         String arr[]={"10","5","-3","3","2","","11","3","-2","","1"};
@@ -157,11 +174,14 @@ public class BinaryTree_07 {
         System.out.println("<==========Path sum II==========>");
         System.out.println("Path sum is : "+pathSumIII(root,8)); 
 
-        //! Ques : Given the root of a binary tree, flatten the tree into a "linked list/skewed tree" wihtout using extra space
-        System.out.println("<====Given the root of a binary tree, flatten the tree into a linked list====>");
+        //! Ques : Given the root of a binary tree, flatten the tree into a "linked list/skewed tree" wihtout using extra space in different space complexity
+        System.out.println("<============Given the root of a binary tree, flatten the tree into a linked list=========>");
         System.out.println("Right node of tree before flatten : "+root.right.val);
-        flattenTree(root);
-        System.out.println("Right node of tree after flatten : "+root.right.val);
+        // System.out.println("flatten tree with space complexity O(h)");
+        // flattenTree(root);
         //? Time complexity : O(n) and Space Complexity : O(h) where h is the call stack frame max element in for tree
+        System.out.println("flatten tree with space complexity O(1)");
+        flatten(root);
+        System.out.println("Right node of tree after flatten : "+root.right.val);
     }
 }
