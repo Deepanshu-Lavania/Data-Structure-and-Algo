@@ -2,10 +2,6 @@ package J_BinaryTree;
 
 import java.util.*;
 
-import javax.swing.tree.TreeNode;
-
-import F_Queue.Queue_02.crNode;
-
 public class BinaryTree_07 {
     public static class Node {
         int val;
@@ -127,7 +123,7 @@ public class BinaryTree_07 {
         root.right=leftTree;
         //? till here , leftTree or rightTree is make flatten now you have to join both tree
         Node temp=leftTree;//To access last node of lefttree so that we can join rightTree with leftTree's last node
-        while (temp!=null && temp.right!=null) {
+        while (temp!=null && temp.right!=null) { 
             temp=temp.right;
         }
         if(temp!=null){
@@ -152,6 +148,75 @@ public class BinaryTree_07 {
             curr=curr.right;
         }
     }
+    
+    
+    public static Node getNode(Node root, int start) {
+        if (root == null)
+            return null;
+        if (root.val == start)
+            return root;
+        Node left = getNode(root.left, start);
+        Node right = getNode(root.right, start);
+        if (left == null)
+            return right; // If the node is not found in the left subtree, return whatever is found in the
+                          // right subtree (could be null or the node).
+        else
+            return left; // If the node is found in the left subtree, return it.
+        // The last two lines are necessary to ensure that the function returns the
+        // required node from the correct subtree. If you didn't include these, you
+        // wouldn't be able to determine whether the node is in the left or right
+        // subtree, and you might return the wrong result or null unnecessarily.
+    }
+
+    public static void preorder(Node root, Map<Node, Node> p) {
+        if (root == null)
+            return;
+        if (root.left != null)
+            p.put(root.left, root);
+        if (root.right != null)
+            p.put(root.right, root);
+        preorder(root.left, p);
+        preorder(root.right, p);
+    }
+
+    public static int amountOfTime(Node root, int start) {
+        Node node = getNode(root, start);// start node =3
+        Map<Node, Node> p = new HashMap<>();
+        preorder(root, p);
+        // bfs
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        Map<Node, Integer> v = new HashMap<>();// infected node data : node with level
+        v.put(node, 0);// initialy 0 level add in map
+        while (q.size() > 0) {
+            Node temp = q.peek();
+            int level = v.get(temp);
+            // check leftnode
+            if (temp.left != null && !v.containsKey(temp.left)) {
+                q.add(temp.left);
+                v.put(temp.left, level + 1);
+            }
+            // check rightnode
+            if (temp.right != null && !v.containsKey(temp.right)) {
+                q.add(temp.right);
+                v.put(temp.right, level + 1);
+            }
+            // check parent
+            if (p.containsKey(temp) && !v.containsKey(p.get(temp))) {// .get method of map return value corresponding to
+                                                                     // key
+                q.add(p.get(temp));
+                v.put(p.get(temp), level + 1);
+            }
+            q.remove();
+        }
+        int max = -1;
+
+        for (Integer value : v.values()) {//we can't apply normal loop in hashmap
+            max = Math.max(max, value);
+        }
+        return max;
+    }
+    
     public static void main(String[] args) {
         // String arr[] = {"5", "4", "8", "11","","13","4", "7", "2","","", "5", "1"};
         String arr[]={"10","5","-3","3","2","","11","3","-2","","1"};
@@ -183,5 +248,9 @@ public class BinaryTree_07 {
         System.out.println("flatten tree with space complexity O(1)");
         flatten(root);
         System.out.println("Right node of tree after flatten : "+root.right.val);
+
+        //! Ques : Amount of Time for Binary Tree to Be Infected
+        System.out.println("<=======Amount of Time for Binary Tree to Be Infected========>");
+        System.out.println(amountOfTime(root,3));
     }
 }
