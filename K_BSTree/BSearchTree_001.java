@@ -82,9 +82,9 @@ public class BSearchTree_001 {
                 return null;
             }
             //caseII: delete node (ont leaf node)
-            if (root.rightNode==null) {
+            if (root.leftNode==null) {
                 return root.rightNode;
-            }else if(root.leftNode==null){
+            }else if(root.rightNode==null){
                 return root.leftNode;
             }
             //case III : delete node(two child)
@@ -135,7 +135,7 @@ public class BSearchTree_001 {
     }
     public static void main(String[] args) {
         BSTree bst = new BSTree();
-        int arr[]={5,1,3,4,2,7};
+        int arr[] = { 5, 1, 3, 4, 2, 7, 8 };
         //! Ques : Insertion in BST
         System.out.println("<=====Build a new BST=========>");
         Node root = bst.constructBST(arr);
@@ -156,7 +156,10 @@ public class BSearchTree_001 {
         }
         //! Ques : Deletion in BST 
         System.out.println("<=====Deletion in BST=======>");
-        delete(root,5);
+        // delete(root, 5);//delete root node
+        // delete(root, 8);//delete leaf node
+        // delete(root, 7);//delete node which has one child
+        delete(root, 3);//delete which has two child
         inorder(root);
         System.out.println();
 
