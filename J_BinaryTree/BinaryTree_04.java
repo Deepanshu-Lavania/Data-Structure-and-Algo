@@ -159,6 +159,11 @@ public class BinaryTree_04 {
         return findLCA(root, p, q);
     }
 
+    public static Node LCAinBST(Node root, Node p , Node q){
+        if (root.val<p.val && root.val<q.val) return lowestCommonAncestor(root.right,p,q);
+        else if (root.val>p.val && root.val>q.val) return lowestCommonAncestor(root.left,p,q);
+        else return root;
+    }
     public static void main(String[] args) {
         BinaryTrees tree = new BinaryTrees();
         int node[] = { 5, 2, 3, -1, -1, 4, -1, -1, 1, 6, -1, -1, 7, -1, -1 };
@@ -188,7 +193,7 @@ public class BinaryTree_04 {
         printLeafToRootPaths(root);
 
         // ! Ques : Find Lowest Common Ancestor
-        System.out.println("<=========Find Lowest Common Ancestor============>");
+        System.out.println("<=========Find Lowest Common Ancestor in BInary Tree============>");
         Node p = findNode(root, 5);
         Node q = findNode(root, 4);
 
@@ -198,5 +203,11 @@ public class BinaryTree_04 {
         } else {
             System.out.println("Lowest Common Ancestor not found.");
         }
+
+
+        System.out.println("<=========Find Lowest Common Ancestor in BSTree============>");
+        Node LCAvalue= LCAinBST(root, p, q);
+        System.out.println("Lowest common Ancessor in BST : "+LCAvalue.val);
+
     }
 }

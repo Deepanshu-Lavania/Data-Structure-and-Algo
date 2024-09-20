@@ -1,15 +1,17 @@
 package K_BSTree;
 
+import javax.swing.tree.TreeNode;
+
 public class BSearchTree_02 {
     public static class Node {
         int val;
-        Node leftNode;
-        Node rightNode;
+        Node left;
+        Node right;
 
         Node(int val) {// constructor
             this.val = val;
-            this.leftNode = null;
-            this.rightNode = null;
+            this.left = null;
+            this.right = null;
         }
     }
 
@@ -27,9 +29,9 @@ public class BSearchTree_02 {
                 // data is created and returned, making it part of the tree
             }
             if (data < root.val) {
-                root.leftNode = insertNode(root.leftNode, data);
+                root.left = insertNode(root.left, data);
             } else {
-                root.rightNode = insertNode(root.rightNode, data);
+                root.right = insertNode(root.right, data);
             }
             return root;
         }
@@ -47,45 +49,110 @@ public class BSearchTree_02 {
         if (root == null) {
             return;
         }
-        inorder(root.leftNode);
+        inorder(root.left);
         System.out.print(root.val + " ");
-        inorder(root.rightNode);
+        inorder(root.right);
     }
 
     public static Node inorderSuccessor(Node root) {
-        while (root.leftNode != null) {
-            root = root.leftNode;
+        while (root.left != null) {
+            root = root.left;
         }
         return root;
 
     }
+    /*
+     * public static Node delete(Node root, int key) {
+     * if (root == null) {
+     * return null;
+     * }
+     * if (root.val > key) {
+     * root.left = delete(root.left, key);
+     * } else if (root.val < key) {
+     * root.right = delete(root.right, key);
+     * } else {
+     * // caseI: delete leaf node
+     * if (root.right == null && root.left == null) {
+     * return null;
+     * }
+     * // Case II: Delete a node with one child
+     * if (root.left == null) {
+     * return root.right; // Fix: Return the right child if left child is null
+     * } else if (root.right == null) {
+     * return root.left; // Fix: Return the left child if right child is null
+     * }
+     * 
+     * // case III : delete node(two child)
+     * Node IS = inorderSuccessor(root.right);
+     * root.val = IS.val;// replace value
+     * root.right = delete(root.right, IS.val);// delete InorderSuccesor node
+     * }
+     * return root;
+     * }
+     */
 
-    public static Node delete(Node root, int key) {
-        if (root == null) {
+    public static void delete(Node root, int key) {
+        if (root == null)
+            return;
+        if (root.val > key) {// go left
+            if (root.left == null)
+                return;
+            if (root.left.val == key) {
+                Node l = root.left;
+                if (l.left == null && l.right == null) {// 0 child
+                    root.left = null;
+                } else if (l.left == null || l.right == null) {// 1 child in left subtree
+                    if (l.left != null)
+                        root.left = l.left;
+                    else
+                        root.left = l.right;
+                } else {// 2 child
+                    Node curr = l;
+                    Node pred = curr.left;
+                    while (pred.right != null)
+                        pred = pred.right;
+                    delete(root, pred.val);
+                    pred.left = curr.left;
+                    pred.right = curr.right;
+                    root.left = pred;
+                }
+            } else
+                delete(root.left, key);
+        } else {// go right
+            if (root.right == null)
+                return;
+            if (root.right.val == key) {
+                Node r = root.right;
+                if (r.left == null && r.right == null) {// 0 child
+                    root.right = null;
+                } else if (r.left == null || r.right == null) {// 1 child in right subtree
+                    if (r.left != null)
+                        root.right = r.left;
+                    else
+                        root.right = r.right;
+                } else {// 2
+                    Node curr = r;
+                    Node pred = curr.right;
+                    while (pred.left != null)
+                        pred = pred.left;
+                    delete(root, pred.val);
+                    pred.right = curr.right;
+                    pred.left = curr.left;
+                    root.right = pred;
+                }
+            } else
+                delete(root.right, key);
+        }
+    }
+
+    public static Node deleteNode(Node root, int key) {
+        if (root == null)
             return null;
-        }
-        if (root.val > key) {
-            root.leftNode = delete(root.leftNode, key);
-        } else if (root.val < key) {
-            root.rightNode = delete(root.rightNode, key);
-        } else {
-            // caseI: delete leaf node
-            if (root.rightNode == null && root.leftNode == null) {
-                return null;
-            }
-            // Case II: Delete a node with one child
-            if (root.leftNode == null) {
-                return root.rightNode; // Fix: Return the right child if left child is null
-            } else if (root.rightNode == null) {
-                return root.leftNode; // Fix: Return the left child if right child is null
-            }
-
-            // case III : delete node(two child)
-            Node IS = inorderSuccessor(root.rightNode);
-            root.val = IS.val;// replace value
-            root.rightNode = delete(root.rightNode, IS.val);// delete InorderSuccesor node
-        }
-        return root;
+        //To delete root node
+        Node temp = new Node(Integer.MAX_VALUE);
+        temp.left = root;
+        delete(temp, key);
+        return temp.left;
     }
 
     public static void main(String[] args) {
@@ -98,10 +165,13 @@ public class BSearchTree_02 {
         inorder(root);
         System.out.println();
         System.out.println("<======Delete node=======>");
-        delete(root, 5);//delete root node
-        // delete(root, 8);//delete leaf node
-        // delete(root, 7);//delete node which has one child
-        // delete(root, 3);//delete which has two child
+        deleteNode(root, 5);//delete root node
+        // deleteNode(root, 8);//delete leaf node
+        // deleteNode(root, 7);//delete node which has one child
+        // deleteNode(root, 3);// delete which has two child
         inorder(root);
+        
+        //! Ques : Lowest common Ancesster
+        
     }
 }
