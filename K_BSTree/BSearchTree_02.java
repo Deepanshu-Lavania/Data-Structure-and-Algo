@@ -165,13 +165,12 @@ public class BSearchTree_02 {
         inorder(root);
         System.out.println();
         System.out.println("<======Delete node=======>");
-        deleteNode(root, 5);//delete root node
+        // deleteNode(root, 5);//delete root node
         // deleteNode(root, 8);//delete leaf node
         // deleteNode(root, 7);//delete node which has one child
-        // deleteNode(root, 3);// delete which has two child
+        deleteNode(root, 3);// delete which has two child
         inorder(root);
         
-        //! Ques : Lowest common Ancesster
         
     }
 }
