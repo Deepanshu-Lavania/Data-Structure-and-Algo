@@ -155,20 +155,21 @@ public class BSearchTree_02 {
         return temp.left;
     }
 
+    //? Approch 1:
     public static void findSucPre(List<Integer> list,int key){
         if(list.get(0)==key){
-            System.out.println("Successor is : "+null+" & Precessor is : "+list.get(1));
+            System.out.println("Precessor is : "+null+" & Successor is : "+list.get(1));
             return;
         }
         else if(list.get(list.size()-1)==key){
-            System.out.println("Successor is : "+(list.size()-2)+" & Precessor is : "+null);
+            System.out.println("Precessor is : "+(list.size()-2)+" & Successor is : "+null);
             return;
         }else{
             boolean flag=false;
             for (int i = 1; i < list.size()-1; i++) {
                 if (list.get(i)==key) {
                     flag=true;
-                    System.out.println("Successor is : "+list.get(i-1)+" & Precessor is : "+list.get(i+1));
+                    System.out.println("Precessor is : "+list.get(i-1)+" & Successor is : "+list.get(i+1));
                     return;
                 }
             }
@@ -179,25 +180,23 @@ public class BSearchTree_02 {
         }
         
     }
-    //? Approch 1:
-    // public static void FindPS(Node root, List<Integer> list){
-    //     if (root==null) {
-    //         return ;
-    //     }
-    //     FindPS(root.left,list);
-    //     list.add(root.val);
-    //     FindPS(root.right, list);
-    //     // findSucPre(list,7);
-    // }
+    public static void FindPSApp1(Node root, List<Integer> list){
+        if (root==null) {
+            return ;
+        }
+        FindPSApp1(root.left,list);
+        list.add(root.val);
+        FindPSApp1(root.right, list);
+    }
     //? Approch 2:
     //* */ If you use int instead of Integer, you cannot assign null to int because it's a primitive type. The int type must always hold some numeric value, which makes it hard to represent the absence of a value (like no predecessor). Using Integer solves this issue by allowing us to work with null.
     static Integer pred =null, suc = null; // Using Integer to handle null values
     static Node temp = null;
-    public static void FindPS(Node root,int key){
+    public static void FindPSApp2(Node root,int key){
         if (root==null) {
             return ;
         }
-        FindPS(root.left,key);
+        FindPSApp2(root.left,key);
         // Work logic for predecessor and successor
         if (root.val == key) {
             // Predecessor is the last node visited before the current one
@@ -212,10 +211,42 @@ public class BSearchTree_02 {
         }
 
         // Update temp to current node after checking conditions
-        temp = root;
+
+        if (temp==null) {
+            System.out.println("temp is null");
+        }
+        temp = root;//temp will be one step ahead for precessor due to start with leaf node
+        System.out.print(temp.val+" ");
 
         // Traverse the right subtree
-        FindPS(root.right, key);
+        FindPSApp2(root.right, key);
+    }
+    
+    public static class State{
+        Node temp = null;
+        boolean flag = true;
+    }
+    public static void inorder(Node root,State state) {//Type variable
+        if (root == null || !state.flag)
+            return;
+
+        inorder(root.left,state);
+        if (state.temp != null && root.val <= state.temp.val) {
+            state.flag = false;
+            return;
+        }
+
+        // Update temp to current root
+        state.temp = root;
+
+        inorder(root.right, state);
+    }
+       
+    public static boolean isValidBST(Node root) {
+        State state =new State();
+        
+        inorder(root,state);
+        return state.flag;
     }
     public static void main(String[] args) {
         BSTree bst = new BSTree();
@@ -236,13 +267,18 @@ public class BSearchTree_02 {
         System.out.println();
 
         //! Ques : Find precessor and successor in BST 
-        System.out.println("<=======Find precessor and successor in BST=========>");
         //? Approch 1 : using inorder traversal and arraylist 
-        // List<Integer> list = new ArrayList<>();
-        // FindPS(root,list);
-        // findSucPre(list,7);
+        System.out.println("<=======Find precessor and successor in BST using extra space =========>");
+        List<Integer> list = new ArrayList<>();
+        FindPSApp1(root,list);
+        findSucPre(list,8);
         //?Aproch 2: using inroder traversal only
-        FindPS(root,8);
+        System.out.println("<=======Find precessor and successor in BST without using extra space =========>");
+        FindPSApp2(root,8);
         System.out.println("precessor is : "+pred+" & Successor is : "+suc);
+
+        //! Ques : Validate BST without using global variable
+        System.out.println("<===========Validate Binary Search Tree============>");
+        System.out.println(isValidBST(root));
     }
 }
