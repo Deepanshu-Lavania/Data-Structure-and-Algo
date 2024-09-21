@@ -1,6 +1,6 @@
 package K_BSTree;
 
-import javax.swing.tree.TreeNode;
+import java.util.*;
 
 public class BSearchTree_02 {
     public static class Node {
@@ -155,6 +155,68 @@ public class BSearchTree_02 {
         return temp.left;
     }
 
+    public static void findSucPre(List<Integer> list,int key){
+        if(list.get(0)==key){
+            System.out.println("Successor is : "+null+" & Precessor is : "+list.get(1));
+            return;
+        }
+        else if(list.get(list.size()-1)==key){
+            System.out.println("Successor is : "+(list.size()-2)+" & Precessor is : "+null);
+            return;
+        }else{
+            boolean flag=false;
+            for (int i = 1; i < list.size()-1; i++) {
+                if (list.get(i)==key) {
+                    flag=true;
+                    System.out.println("Successor is : "+list.get(i-1)+" & Precessor is : "+list.get(i+1));
+                    return;
+                }
+            }
+            if (!flag) {
+                System.out.println("Enter the correct key to find Suc and Pre ");
+                return;  
+            }
+        }
+        
+    }
+    //? Approch 1:
+    // public static void FindPS(Node root, List<Integer> list){
+    //     if (root==null) {
+    //         return ;
+    //     }
+    //     FindPS(root.left,list);
+    //     list.add(root.val);
+    //     FindPS(root.right, list);
+    //     // findSucPre(list,7);
+    // }
+    //? Approch 2:
+    //* */ If you use int instead of Integer, you cannot assign null to int because it's a primitive type. The int type must always hold some numeric value, which makes it hard to represent the absence of a value (like no predecessor). Using Integer solves this issue by allowing us to work with null.
+    static Integer pred =null, suc = null; // Using Integer to handle null values
+    static Node temp = null;
+    public static void FindPS(Node root,int key){
+        if (root==null) {
+            return ;
+        }
+        FindPS(root.left,key);
+        // Work logic for predecessor and successor
+        if (root.val == key) {
+            // Predecessor is the last node visited before the current one
+            if (temp != null) {
+                pred = temp.val; // Set predecessor to the value of temp
+            }
+
+            // Flag is not needed as we'll handle the successor after this node
+        } else if (root.val > key && suc == null) {
+            // First node greater than key is the successor
+            suc = root.val;
+        }
+
+        // Update temp to current node after checking conditions
+        temp = root;
+
+        // Traverse the right subtree
+        FindPS(root.right, key);
+    }
     public static void main(String[] args) {
         BSTree bst = new BSTree();
         int arr[] = { 5, 1, 3, 4, 2, 7, 8 };
@@ -164,13 +226,23 @@ public class BSearchTree_02 {
         System.out.println(root.val);
         inorder(root);
         System.out.println();
+        // ! Ques  :Deletion in BST using precessor
         System.out.println("<======Delete node=======>");
         // deleteNode(root, 5);//delete root node
         // deleteNode(root, 8);//delete leaf node
         // deleteNode(root, 7);//delete node which has one child
-        deleteNode(root, 3);// delete which has two child
+        // deleteNode(root, 3);// delete which has two child
         inorder(root);
-        
-        
+        System.out.println();
+
+        //! Ques : Find precessor and successor in BST 
+        System.out.println("<=======Find precessor and successor in BST=========>");
+        //? Approch 1 : using inorder traversal and arraylist 
+        // List<Integer> list = new ArrayList<>();
+        // FindPS(root,list);
+        // findSucPre(list,7);
+        //?Aproch 2: using inroder traversal only
+        FindPS(root,8);
+        System.out.println("precessor is : "+pred+" & Successor is : "+suc);
     }
 }
