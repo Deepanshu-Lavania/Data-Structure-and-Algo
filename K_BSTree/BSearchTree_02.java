@@ -148,55 +148,61 @@ public class BSearchTree_02 {
     public static Node deleteNode(Node root, int key) {
         if (root == null)
             return null;
-        //To delete root node
+        // To delete root node
         Node temp = new Node(Integer.MAX_VALUE);
         temp.left = root;
         delete(temp, key);
         return temp.left;
     }
 
-    //? Approch 1:
-    public static void findSucPre(List<Integer> list,int key){
-        if(list.get(0)==key){
-            System.out.println("Precessor is : "+null+" & Successor is : "+list.get(1));
+    // ? Approch 1:
+    public static void findSucPre(List<Integer> list, int key) {
+        if (list.get(0) == key) {
+            System.out.println("Precessor is : " + null + " & Successor is : " + list.get(1));
             return;
-        }
-        else if(list.get(list.size()-1)==key){
-            System.out.println("Precessor is : "+(list.size()-2)+" & Successor is : "+null);
+        } else if (list.get(list.size() - 1) == key) {
+            System.out.println("Precessor is : " + (list.size() - 2) + " & Successor is : " + null);
             return;
-        }else{
-            boolean flag=false;
-            for (int i = 1; i < list.size()-1; i++) {
-                if (list.get(i)==key) {
-                    flag=true;
-                    System.out.println("Precessor is : "+list.get(i-1)+" & Successor is : "+list.get(i+1));
+        } else {
+            boolean flag = false;
+            for (int i = 1; i < list.size() - 1; i++) {
+                if (list.get(i) == key) {
+                    flag = true;
+                    System.out.println("Precessor is : " + list.get(i - 1) + " & Successor is : " + list.get(i + 1));
                     return;
                 }
             }
             if (!flag) {
                 System.out.println("Enter the correct key to find Suc and Pre ");
-                return;  
+                return;
             }
         }
-        
+
     }
-    public static void FindPSApp1(Node root, List<Integer> list){
-        if (root==null) {
-            return ;
+
+    public static void FindPSApp1(Node root, List<Integer> list) {
+        if (root == null) {
+            return;
         }
-        FindPSApp1(root.left,list);
+        FindPSApp1(root.left, list);
         list.add(root.val);
         FindPSApp1(root.right, list);
     }
-    //? Approch 2:
-    //* */ If you use int instead of Integer, you cannot assign null to int because it's a primitive type. The int type must always hold some numeric value, which makes it hard to represent the absence of a value (like no predecessor). Using Integer solves this issue by allowing us to work with null.
-    static Integer pred =null, suc = null; // Using Integer to handle null values
+
+    // ? Approch 2:
+    // * */ If you use int instead of Integer, you cannot assign null to int because
+    // it's a primitive type. The int type must always hold some numeric value,
+    // which makes it hard to represent the absence of a value (like no
+    // predecessor). Using Integer solves this issue by allowing us to work with
+    // null.
+    static Integer pred = null, suc = null; // Using Integer to handle null values
     static Node temp = null;
-    public static void FindPSApp2(Node root,int key){
-        if (root==null) {
-            return ;
+
+    public static void FindPSApp2(Node root, int key) {
+        if (root == null) {
+            return;
         }
-        FindPSApp2(root.left,key);
+        FindPSApp2(root.left, key);
         // Work logic for predecessor and successor
         if (root.val == key) {
             // Predecessor is the last node visited before the current one
@@ -212,25 +218,26 @@ public class BSearchTree_02 {
 
         // Update temp to current node after checking conditions
 
-        if (temp==null) {
+        if (temp == null) {
             System.out.println("temp is null");
         }
-        temp = root;//temp will be one step ahead for precessor due to start with leaf node
-        System.out.print(temp.val+" ");
+        temp = root;// temp will be one step ahead for precessor due to start with leaf node
+        System.out.print(temp.val + " ");
 
         // Traverse the right subtree
         FindPSApp2(root.right, key);
     }
-    
-    public static class State{
+
+    public static class State {
         Node temp = null;
         boolean flag = true;
     }
-    public static void inorder(Node root,State state) {//Type variable
+
+    public static void inorder(Node root, State state) {// Type variable
         if (root == null || !state.flag)
             return;
 
-        inorder(root.left,state);
+        inorder(root.left, state);
         if (state.temp != null && root.val <= state.temp.val) {
             state.flag = false;
             return;
@@ -241,13 +248,24 @@ public class BSearchTree_02 {
 
         inorder(root.right, state);
     }
-       
+
     public static boolean isValidBST(Node root) {
-        State state =new State();
-        
-        inorder(root,state);
+        State state = new State();
+
+        inorder(root, state);
         return state.flag;
     }
+
+    public static Node consBstArr(int arr[], int low, int hi) {
+        if (low > hi)
+            return null;
+        int mid = low + (hi - low) / 2;
+        Node root = new Node(arr[mid]);
+        root.left = consBstArr(arr, low, mid - 1);
+        root.right = consBstArr(arr, mid + 1, hi);
+        return root;
+    }
+
     public static void main(String[] args) {
         BSTree bst = new BSTree();
         int arr[] = { 5, 1, 3, 4, 2, 7, 8 };
@@ -257,7 +275,7 @@ public class BSearchTree_02 {
         System.out.println(root.val);
         inorder(root);
         System.out.println();
-        // ! Ques  :Deletion in BST using precessor
+        // ! Ques :Deletion in BST using precessor
         System.out.println("<======Delete node=======>");
         // deleteNode(root, 5);//delete root node
         // deleteNode(root, 8);//delete leaf node
@@ -266,19 +284,26 @@ public class BSearchTree_02 {
         inorder(root);
         System.out.println();
 
-        //! Ques : Find precessor and successor in BST 
-        //? Approch 1 : using inorder traversal and arraylist 
+        // ! Ques : Find precessor and successor in BST
+        // ? Approch 1 : using inorder traversal and arraylist
         System.out.println("<=======Find precessor and successor in BST using extra space =========>");
         List<Integer> list = new ArrayList<>();
-        FindPSApp1(root,list);
-        findSucPre(list,8);
-        //?Aproch 2: using inroder traversal only
+        FindPSApp1(root, list);
+        findSucPre(list, 8);
+        // ?Aproch 2: using inroder traversal only
         System.out.println("<=======Find precessor and successor in BST without using extra space =========>");
-        FindPSApp2(root,8);
-        System.out.println("precessor is : "+pred+" & Successor is : "+suc);
+        FindPSApp2(root, 8);
+        System.out.println("precessor is : " + pred + " & Successor is : " + suc);
 
-        //! Ques : Validate BST without using global variable
+        // ! Ques : Validate BST without using global variable
         System.out.println("<===========Validate Binary Search Tree============>");
         System.out.println(isValidBST(root));
+
+        // ! Ques : Construct BST using sorted array [leetcode -108]
+        System.out.println("<=======Construct BST using sorted array=========>");
+        int bstArr[] = { 1, 2, 3, 4, 5, 6, 7 };
+        int low = 0;
+        int high = bstArr.length - 1;
+        System.out.println(consBstArr(bstArr, low, high).val);
     }
 }
