@@ -53,7 +53,8 @@ public class BSearchTree_03 {
         inorder(root.right);
     }
 
-    // public static int sum=0; //?Instead of Global variable, use object / data stucture for variable
+    // public static int sum=0; //!Instead of Global variable, use object / data stucture for variable
+    //?Using array data structure object 
     public static Node convertBST(Node root,int sum[]){
         if(root==null) return null;
         convertBST(root.right, sum);
@@ -62,6 +63,30 @@ public class BSearchTree_03 {
         convertBST(root.left, sum);
         return root;
     }
+    
+    //? Using object , used variable
+    static class Data {
+        Node prev =null;
+        int minDiff = Integer.MAX_VALUE;
+    }
+    public static void inoderTree(Node root, Data data){
+        if(root==null) return ;
+        inoderTree(root.left, data);
+        if (data.prev!=null) {
+            int difference = Math.abs(root.val-data.prev.val);
+            data.minDiff = Math.min(difference, data.minDiff);
+        }
+        data.prev = root;
+        inoderTree(root.right, data);
+    }
+    public static int minDiffInBST(Node root){
+        Data data = new Data();
+        inoderTree(root, data);
+        return data.minDiff;
+    }
+    
+    
+    
     public static void main(String[] args) {
         BSTree bst = new BSTree();
         int arr[] = { 5, 1, 3, 4, 2, 7, 8 };
@@ -73,11 +98,13 @@ public class BSearchTree_03 {
         System.out.println();
 
         //! Ques : Convert BST into greater tree
-        System.out.println("<========= Convert BST inot greater tree==========>");
+        System.out.println("<========= Convert BST into greater tree==========>");
         int sum[]={0};
         convertBST(root,sum);
+
         inorder(root);
-        
-        
+        //! Ques : find Minimum difference between any two nodes in BST
+        System.out.println("<======Minimum difference between any two nodes in BST=====>");
+        System.out.println(minDiffInBST(root));
     }
 }
