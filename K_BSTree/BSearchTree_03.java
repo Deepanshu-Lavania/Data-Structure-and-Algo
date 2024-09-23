@@ -103,6 +103,7 @@ public class BSearchTree_03 {
         convertBST(root,sum);
 
         inorder(root);
+        System.out.println();
         //! Ques : find Minimum difference between any two nodes in BST
         System.out.println("<======Minimum difference between any two nodes in BST=====>");
         System.out.println(minDiffInBST(root));
