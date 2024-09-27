@@ -70,6 +70,24 @@ public class PriorityQueue_02 {
         
     }//? Overall time complexity : O(nlogn) and Space Comple: O(1)
 
+    public static void sumSmallElek1k2(int arr[] , int k1, int k2){
+        // Initialize PriorityQueue with elements from array
+        PriorityQueue<Integer> pque = new PriorityQueue<>(Comparator.reverseOrder());
+        for (int i = 0;i<arr.length; i++) {
+            pque.add(arr[i]);
+            if (pque.size()>=k2) {
+                pque.remove();
+            }
+        }
+        System.out.println(pque);//get max heap
+        int sum=0;
+        while (pque.size()!=k1) {
+            sum+=pque.remove();
+        }
+        System.out.println(sum);
+    }//? Time complexity :O(nlogn)
+    
+
     public static void main(String[] args) {
         List<Integer> arr = new ArrayList<>();// don't change original array
         int k = 3;
@@ -120,6 +138,13 @@ public class PriorityQueue_02 {
         int arry[]= {2,4,3,1,5};
         int kth =3;
         returnLargestNum(arry,kth);
+
+        //!Ques : find sum of all elements between k1th and k2th for smallest elements
+
+        int aray[] = {20,8,22,4,12,10,14};
+        int k1th =3;
+        int k2th = 6;
+        sumSmallElek1k2(aray,k1th,k2th);
 
     }
 }
