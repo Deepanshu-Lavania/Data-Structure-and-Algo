@@ -37,6 +37,7 @@ public class PriorityQueue_03 {
     }
 
     public static void main(String[] args) {
+        //! Ques : Given a stream of integers , find the median of the stream
         PriorityQueue<Integer> leftpq =new PriorityQueue<>(Comparator.reverseOrder());
         PriorityQueue<Integer> rightpq =new PriorityQueue<>();
         insert(leftpq, rightpq, 15);
@@ -48,7 +49,5 @@ public class PriorityQueue_03 {
         System.out.println(findmedian(leftpq, rightpq));
         insert(leftpq, rightpq, 25);
         System.out.println(findmedian(leftpq, rightpq));
-
-
     }
 }
