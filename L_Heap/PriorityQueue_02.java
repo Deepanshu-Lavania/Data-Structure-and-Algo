@@ -34,7 +34,9 @@ public class PriorityQueue_02 {
         // Insert the first set of points into the heap
         for (int i = 0; i < x1.length; i++) {
             Point p = new Point(x1[i], y1[i]);
+            System.out.println(p.x +"  "+ p.y +" : "+p.distance);
             cordi.offer(p);//add element into priorityQueue
+
             if (cordi.size() > kitem) {
                 cordi.poll(); // Remove the point with the largest distance
             }
@@ -48,6 +50,25 @@ public class PriorityQueue_02 {
         }
 
     }
+
+    public static void returnLargestNum(int arry[],int kth){
+        // Initialize PriorityQueue with elements from array
+        PriorityQueue<Integer> pque = new PriorityQueue<>();
+        for (int i = 0; i < arry.length; i++) {// O(n log n) : O(n) for n elements and due to priorit o(logn)
+            pque.add(arry[i]);
+        }
+
+        for (int i = 0; i < kth; i++) {//O(k*log n) :O(k) kth iteation and O(logn) for insertion & deletion 
+            int f = pque.remove();
+            int s =pque.remove();
+            pque.add(f*s);
+        }
+        while (pque.size()!=1) {//O((n - 1) log n) : O(logn) for remove and O(n-1) for loop
+            pque.remove();
+        }
+        System.out.println(pque);
+        
+    }//? Overall time complexity : O(nlogn) and Space Comple: O(1)
 
     public static void main(String[] args) {
         List<Integer> arr = new ArrayList<>();// don't change original array
@@ -92,6 +113,13 @@ public class PriorityQueue_02 {
         int x1[] = { 5, 1, 3, 5, 7, 9 };
         int y1[] = { 3, 2, 4, 6, 8, 10 };
         kthclosestPoints(x1,y1);
+
+        //! Ques : remove two samllest element from array and multiply then add this result back into original array upto kth times and return largest element 
+
+        System.out.println("<=====Return largest elem after multiply two smallest num=====>");
+        int arry[]= {2,4,3,1,5};
+        int kth =3;
+        returnLargestNum(arry,kth);
 
     }
 }

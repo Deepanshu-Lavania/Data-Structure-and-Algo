@@ -30,20 +30,21 @@ public class PriorityQueue_01 {
     public static void main(String[] args) {
         // PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());//? by default in ascending order
 
-        /* PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         pq.add(10);
         pq.add(20);
         pq.add(11);
         pq.add(15);
         pq.add(2);
         pq.add(50);
+        System.out.println(pq);
         System.out.println("Before Remove ====> ");
         System.out.println("Peek Elem : "+pq.peek());
         System.out.println(pq);
         System.out.println("After Remove ====> ");
         pq.remove();
         System.out.println("Peek Elem : "+pq.peek());
-        System.out.println(pq); */
+        System.out.println(pq); 
 
         PriorityQueue<Student> studentpq = new PriorityQueue<>(new StudentComparator());//when we have sns string data to compare then we have to use comparator so that we compare the value of String 
         //it is compare throgh our own make logic
