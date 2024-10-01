@@ -9,7 +9,7 @@ public class NumSystem {
 /*         int binary_num=sc.nextInt();
         int num=binary_num;
         int ans=0;
-        int pw=1;//2 raise to the power is 1
+        int pw=1;//pwoer of 2 
         while(binary_num>0){
             int unit_digit= binary_num%10;
             ans =ans +(unit_digit*pw);
@@ -23,7 +23,7 @@ public class NumSystem {
         int deci_num = sc.nextInt();
         int n=deci_num;
         int ans =0 ;
-        int pw=1;
+        int pw=1;//power of 10
         while (deci_num>0) {
             int parity = deci_num%2;
             ans =(parity*pw) +ans;

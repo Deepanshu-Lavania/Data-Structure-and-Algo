@@ -19,6 +19,7 @@ public class Second {
         // Float f2 = Sc.nextFloat();
         // System.out.println(f + " : "+f2);
         System.out.println((int)(Math.random()*34));
+        System.out.println("random "+Math.random());
         int d=10;
         int e=12;
         if(d>5 & e>5){

@@ -1,6 +1,7 @@
-import java.util.Scanner;
+package A_JAVA.Java1;
+import java.util.*;
 
-public class JavaBasic_01 {
+public class Revision {
     public static void main(String[] args) {
        /*  System.out.println("Hello world");
         Scanner sc = new Scanner(System.in);
@@ -27,4 +28,5 @@ public class JavaBasic_01 {
         // If you want to read the rest of the line
         sc.nextLine();  // Clear the newline character
     }
+
 }

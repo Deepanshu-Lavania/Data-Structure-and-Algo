@@ -17,6 +17,6 @@ public class Bitwise {
         boolean r;
         q=p=15;//p=15,q=15
         r=p<15;//false
-        System.out.println("p="+p+"q="+q+"r="+r);
+        System.out.println("p="+p+" q="+q+" r="+r);
     }
 }

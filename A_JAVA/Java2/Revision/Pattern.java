@@ -1,5 +1,6 @@
+package A_JAVA.Java2.Revision;
 
-public class JavaBasic_02 {
+public class Pattern {
     public static void main(String[] args) {
         System.out.println("Sout value of r & c : ");
         int r = 5;
@@ -187,4 +188,6 @@ public class JavaBasic_02 {
         // }
         
     }
+
+
 }
