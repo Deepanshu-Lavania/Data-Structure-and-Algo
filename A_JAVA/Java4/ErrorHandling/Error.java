@@ -12,7 +12,14 @@ class NegativeRadiusException extends Exception{
 
 public class Error {
 
-    public static int divide(int a, int b) throws ArithmeticException{
+   /*  public static int divide(int a, int b) throws ArithmeticException{
+        if(a<=0 || b<=0){
+            throw new ArithmeticException();
+        }
+        int result = a / b;
+        return result;
+    } */
+    public static int divide(int a, int b){//no neeed of throws ArithmeticException because ArithmeticException is in-built
         if(a<=0 || b<=0){
             throw new ArithmeticException();
         }
@@ -31,6 +38,7 @@ public class Error {
 
     public static void main(String[] args) {
         try{
+            // int c =divide(6,2);
             int c =divide(6,0);
             System.out.println(c);
         }catch(Exception e){
@@ -42,6 +50,9 @@ public class Error {
             System.out.println(result);
         } catch (NegativeRadiusException e) {
             System.out.println("NegativeRadiusException caught: " + e.getMessage());
+            System.out.println("NegativeRadiusException caught: " + e.toString());
+        }finally{
+            System.out.println("Iam always executed");
         }
 
     }
