@@ -8,9 +8,10 @@ public class Replace {
         String rFirst =m1.replaceAll(" ");
         System.out.println(rFirst);
 
-        Pattern p2= Pattern.compile("1dollar");
-        Matcher m2=p2.matcher("I have 1dollar of rate 75 rupees for 1dollar");
-        String replaceString = m2.replaceFirst(m2.quoteReplacement("1$"));
+
+        Pattern p2 = Pattern.compile("1dollar");
+        Matcher m2 = p2.matcher("I have 1dollar of rate 75 rupees for 1dollar");
+        String replaceString = m2.replaceAll(m2.quoteReplacement("1$"));
         System.out.println(replaceString);
     }
 }
