@@ -9,10 +9,13 @@ public class ArrayList_01 {
         li.add(1);//add in last
         li.add(2);
         li.add(7);
+        System.out.println(li);
         li.add(2, 100);
         li.set(3, 10);
+        System.out.println(li);
         li.add(2);
-        li.remove(1);//for removing element according to index
+        li.remove(0);//for removing element according to index
+        System.out.println(li);
         li.remove(Integer.valueOf(2));//it can't remove the duplicate value when multiple value exist in array
         System.out.println(li.contains(Integer.valueOf(14)));
         // li.add("Deepnashu");//This give error because you already declare the datatype of array

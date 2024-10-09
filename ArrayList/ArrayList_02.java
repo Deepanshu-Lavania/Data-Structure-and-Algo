@@ -13,7 +13,7 @@ public class ArrayList_02 {
         }
         System.out.println(list);
     }
-
+   
     public static void main(String[] args) {
         ArrayList l = new ArrayList();
         ArrayList<Integer> list = new ArrayList<>();
@@ -24,6 +24,7 @@ public class ArrayList_02 {
         l.add(1);// add in last
         l.add(2);
         l.add(7);
+        System.out.println(l);
         l.add(2, 100);
         l.set(3, 10);
         System.out.println("LastIndex of element is : " + l.lastIndexOf(5));
