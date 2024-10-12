@@ -2,8 +2,6 @@ package ArraysOneDimens;
 
 import java.util.Scanner;
 
-import org.w3c.dom.events.Event;
-
 class ArrayObj {
     void SZeroOnes(int[] arr) {
 

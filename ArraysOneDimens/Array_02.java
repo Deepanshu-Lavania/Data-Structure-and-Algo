@@ -1,6 +1,5 @@
 package ArraysOneDimens;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 //! Array reference in Java
@@ -56,7 +55,7 @@ class CloneArray {
             }
         }
         if(notval==-1){
-            System.out.println("There is no element so we can't count number greater than value");
+            System.out.println("There is no greater element so we can't count number greater than value");
         }else{
            return;
         }
@@ -95,6 +94,7 @@ public class Array_02 {
         System.out.println();
         System.out.println("Clone array after initialization : ");
         Array.orgArr(arr2);
+        System.out.println();
 
         int array[] = { 5, 6, 5, 1, 5,4 };
         Array.CountValue(array);

@@ -29,7 +29,7 @@ class ArrayCollection{
     void findValue(){
         int fVarr[]={1,5,3,5,6,7,7,8,8,8,9,9,9,9,9,6,6,5,4,4,4,3,3,3,3};
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter value for find in arrray : ");
+        System.out.print("Enter value to find in arrray : ");
         int fvalue = sc.nextInt();
         int ans =-1;
         for (int i = 0; i < fVarr.length; i++) {

@@ -3,7 +3,7 @@ package ArraysOneDimens;
 // import java.util.Arrays;
 
 class ArrayClass {
-    //? Pattern : Target_Sum Questions
+    // ? Pattern : Target_Sum Questions
     // ! Ques: Count the number of pair whose sum is equal to the given value x
     void Pairsum() {
         int arr[] = { 4, 6, 3, 5, 8, 2, 1, 0 };
@@ -39,12 +39,13 @@ class ArrayClass {
         System.out.println("the number of pair is : " + triplet);
     }
 
-    //? Pattern : Target_Pattern Questions
-    // !Imp Ques: Find the unique number in a given Array where all the elements are being repeated twice with one value being unique.
-    // Algo : 
-        //   step1 : Traverse all pairs 
-        //   step2 : Equal pairs -> Mark -1
-        //   step3 : Traverse array which is > 0
+    // ? Pattern : Target_Pattern Questions
+    // !Imp Ques: Find the unique number in a given Array where all the elements are
+    // being repeated twice with one value being unique.
+    // Algo :
+    // step1 : Traverse all pairs
+    // step2 : Equal pairs -> Mark -1
+    // step3 : Traverse array which is > 0
     //
     void uniqueVal() {
         int arr[] = { 1, 2, 3, 4, 5, 2, 1, 3 };
@@ -70,7 +71,7 @@ class ArrayClass {
         System.out.println();
         int arr[] = { 5, 2, 5, 3, 5 };
         int FirstMax = Integer.MIN_VALUE;
-        System.out.println(FirstMax);
+        System.out.println("Integer.MIn_VALUE : "+FirstMax);
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > FirstMax) {
                 FirstMax = arr[i];
@@ -105,43 +106,45 @@ class ArrayClass {
 }
 
 public class Array_04 {
-    //! Ques : Return the first value that is repeating in this array. If no value is being repeated return -1.
+    // ! Ques : Return the first value that is repeating in this array. If no value
+    // is being repeated return -1.
     static int FirstRepVal() {
         int arr[] = { 1, 5, 3, 4, 6, 3, 4 };
         // int RepeatVal = 0;
         // outerLoop:
         // for (int i = 0; i < arr.length; i++) {
-        //     for (int j = i + 1; j < arr.length; j++) {
-        //         System.out.println(arr[i] +" , "+arr[j]);
-        //         if (arr[i] == arr[j]) {
-        //             RepeatVal = arr[i];
-        //             break outerLoop;
-        //         }
-        //     }
+        // for (int j = i + 1; j < arr.length; j++) {
+        // System.out.println(arr[i] +" , "+arr[j]);
+        // if (arr[i] == arr[j]) {
+        // RepeatVal = arr[i];
+        // break outerLoop;
+        // }
+        // }
         // }
         // if (RepeatVal == 0) {
-        //     return -1;
+        // return -1;
         // } else {
-        //     return RepeatVal;
+        // return RepeatVal;
         // }
 
-        //* or 
+        // * or
         for (int i = 0; i < arr.length; i++) {
-            for (int j = i+1; j < arr.length; j++) {
-                if (arr[i]==arr[j]) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
                     return arr[i];
                 }
             }
         }
         return -1;
     }
-    static int LastRepVal(){
+
+    static int LastRepVal() {
         int RepeatLast = 0;
-        int arr[]= { 1, 5, 3, 4, 6, 3, 4 };
+        int arr[] = { 1, 5, 3, 4, 6, 3, 4 };
         for (int i = 0; i < arr.length; i++) {
-            for (int j = i+1; j < arr.length; j++) {
-                if(arr[i]==arr[j]){
-                    RepeatLast=arr[i];
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    RepeatLast = arr[i];
                 }
             }
         }
@@ -156,7 +159,7 @@ public class Array_04 {
         arr.uniqueVal();
         arr.IILargest();
         // FirstRepVal();
-        System.out.println("Repeat value is : "+FirstRepVal());
-       System.out.println("Repeat value is : "+LastRepVal());
+        System.out.println("Repeat value is : " + FirstRepVal());
+        System.out.println("Repeat value is : " + LastRepVal());
     }
 }
