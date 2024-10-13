@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 class ArrayObj {
     void SZeroOnes(int[] arr) {
-
         int count = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == 0) {
@@ -19,7 +18,6 @@ class ArrayObj {
                 arr[i] = 1;
             }
         }
-
     }
 }
 
@@ -28,6 +26,7 @@ public class Array_06 {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
+        System.out.println();
     }
 
     static void swaparr(int arr[], int i, int j) {
@@ -38,7 +37,6 @@ public class Array_06 {
 
     // * Functions Call
     static void ZeroOnesPointer(int arr[], int left, int right) {
-        System.out.println();
         while (left < right) {
             if (arr[left] == 1 && arr[right] == 0) {
                 swaparr(arr, left, right);
@@ -52,11 +50,10 @@ public class Array_06 {
                 break;
             }
         }
-        printarr(arr);
+        // printarr(arr);
     }
 
     static void EvenOdd(int arr[], int left, int right) {
-        System.out.println();
         while (left < right) {
             if (arr[left] % 2 == 1 && arr[right] % 2 == 0) {
                 swaparr(arr, left, right);
@@ -70,41 +67,33 @@ public class Array_06 {
                 right--;
             }
         }
-        printarr(arr);
+        // printarr(arr);
     }
 
     static int[] NonDecSortArr(int arr[], int left, int right) {
         System.out.println();
-        int ans[] = new int[arr.length];
-        // while(left< right){
-        // arr[left]*=arr[left];
-        // arr[right]*=arr[right];
-        // left++;
-        // right--;
-        // }
-        // for (int i = 0; i < arr.length; i++) {
-        // for (int j = i+1; j < arr.length; j++) {
-        // if(arr[i]>arr[j]){
-        // swaparr(arr, i, j);
-        // }
-        // }
-        // }
-        int k = 0;
-        while (left <= right) {
-            if (Math.abs(arr[left]) > Math.abs(arr[right])) {
-                ans[k++] = arr[left] * arr[left];
-                left++;
-            } else {
-                ans[k++] = arr[right] * arr[right];
-                right--;
+        
+        //square
+        while (left < right) {
+            arr[left] *= arr[left];
+            arr[right] *= arr[right];
+            left++;
+            right--;
+        }
+        //sorting
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    swaparr(arr, i, j);
+                }
             }
         }
-        return ans;
+        return arr;
     }
 
     public static void main(String[] args) {
 
-        //! Two array Pointers 
+        // ! Two array Pointers
 
         ArrayObj arrObj = new ArrayObj();
 
@@ -117,24 +106,29 @@ public class Array_06 {
             arr[i] = sc.nextInt();
         }
         // ? Approch Ist this is not optimized due to using two loops/Traversing
+        System.out.println("now array by appoch I is : ");
         arrObj.SZeroOnes(arr);
         printarr(arr);
+        // ? T.C:O(n)
 
         // ? Approch IInd, this is using pointers with single traverse
+        System.out.println("now array by appoch II is : ");
         ZeroOnesPointer(arr, 0, arr.length - 1);
+        printarr(arr);
+        // ? T.C:O(n) but optimized approch because of traversal at once time only
 
-        // ! Ques: Given an array of integers 'a' move all athe even integers at the
-        // begining
-        // of the array folleowed by all the odd integers. The relative order of odd or
-        // even integers does not matter.
+        // ! Ques: Given an array of integers 'a' move all the even integers at the
+        // begining of the array folleowed by all the odd integers. The relative order
+        // of odd or even integers does not matter.
         int arrEvenOdd[] = { 1, 2, 3, 4, 5, 6, 7 };
         EvenOdd(arrEvenOdd, 0, arrEvenOdd.length - 1);
+        printarr(arrEvenOdd);
 
         // ! Ques: Given an integer array 'a' sorted in non-decreasing(can be repeated
         // value) order, return an array of the squares of each number sorted in
         // non-decreasing order.
         // int NonDecSortArr[] = { -10, -3, -2, 4, 11, 5 };
-        int NonDecSortArr[]={-10,-3,-2,4,11,5};
+        int NonDecSortArr[] = { -10, -3, -2, 4, 11, 5 };
         int[] NonDArry = NonDecSortArr(NonDecSortArr, 0, NonDecSortArr.length - 1);
         printarr(NonDArry);
     }

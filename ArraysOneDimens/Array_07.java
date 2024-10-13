@@ -31,22 +31,21 @@ public class Array_07 {
 
     static void PrefixSum() {
         int arr[] = { 5, 4, 1, 3, 2, 5 };
-        /*
-         * BrutForse Method :
-         * int j = 0;
-         * int sum = 0;
-         * for (int i = 0; i < arr.length; i++) {
-         * sum = arr[i] + sum;
-         * System.out.print(" sum is : " + sum + " ");
-         * if (i == j) {
-         * arr[j] = sum;
-         * System.out.println(arr[i]);
-         * }
-         * j++;
-         * }
-         */
 
-        // Optimized method
+        // BrutForse Method :
+        // int j = 0;
+        // int sum = 0;
+        // for (int i = 0; i < arr.length; i++) {
+        // sum = arr[i] + sum;
+        // System.out.print(" sum is : " + sum + " ");
+        // if (i == j) {
+        // arr[j] = sum;
+        // System.out.println(arr[i]);
+        // }
+        // j++;
+        // }
+
+        // ? Optimized method
         for (int i = 1; i < arr.length; i++) {
             arr[i] = arr[i - 1] + arr[i];// ? This is optimized code because it does not traverse array again and again
                                          // for sum
@@ -54,7 +53,9 @@ public class Array_07 {
         printarr(arr);
     }
 
-    static void SuffixSum(int arr[]) {
+    static void SuffixSum() {
+        System.out.println();
+        int arr[] = { 5, 4, 1, 3, 2 };
         for (int i = arr.length - 1; i >= 0; i--) {
             if (i == arr.length - 1) {
                 arr[i] = arr[i];
@@ -74,6 +75,10 @@ public class Array_07 {
         int r = sc.nextInt() - 1;
         int sum = 0;
 
+        if (StartIndex < 0 || r >= arr.length || StartIndex > r) {
+            System.out.println("Invalid indices.");
+            return;
+        }
         // ? Brutforce Method
         // for (int i =StartIndex; i <= r; i++) {
         // sum = sum + arr[i];
@@ -84,8 +89,9 @@ public class Array_07 {
         for (int i = 1; i < arr.length; i++) {// Find Prefix sum
             arr[i] = arr[i - 1] + arr[i];
         }
-        for (int i = StartIndex; i < arr.length; i++) {// Calculate sum from range l to r through prefixSum array
+        for (int i = StartIndex; i <=r; i++) {// Calculate sum from range l to r through prefixSum array
             sum = arr[r] - arr[StartIndex - 1];
+            
         }
         System.out.print("The sum is : " + sum);
     }
@@ -101,7 +107,7 @@ public class Array_07 {
         int count = 0;
         int TotalSum = arr[arr.length - 1];
         System.out.println(TotalSum);
-        for (int i = 1; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             int prefixSum = arr[i];
             int SuffixSum = TotalSum - prefixSum;
             System.out.println(prefixSum + " : " + SuffixSum);
@@ -122,7 +128,16 @@ public class Array_07 {
         // ! Ques : Given an integer array 'a' return the prefix sum/running sum in the
         // same array without creating a new array.
         PrefixSum();
-        SuffixSum(inputarry());
+        // SuffixSum(inputarry());
+        /*
+         * Example: Given an array arr = [1, 2, 3, 4], the suffix sum array would be:
+         * suffix[3] = 4
+         * suffix[2] = 3 + 4 = 7
+         * suffix[1] = 2 + 3 + 4 = 9
+         * suffix[0] = 1 + 2 + 3 + 4 = 10
+         * The resulting suffix sum array would be: suffix = [10, 9, 7, 4].
+         */
+        SuffixSum();
 
         // ! Ques : Given an array of integersof size n. Answer q queries where you need
         // to print the sum of values in a given range of indices from l to r(both
