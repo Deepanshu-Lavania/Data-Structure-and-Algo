@@ -3,6 +3,15 @@ package ArraysTwoDimens;
 import java.util.Scanner;
 
 public class ArrTwoD_01 {
+    static void printArr(int arr[][]) {
+        System.out.println();
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                System.out.print(arr[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
 
     static int[][] InputArry() {
         Scanner sc = new Scanner(System.in);
@@ -18,16 +27,6 @@ public class ArrTwoD_01 {
             }
         }
         return arr;// it return 2D array
-    }
-
-    static void printArr(int arr[][]) {
-        System.out.println();
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                System.out.print(arr[i][j] + "  ");
-            }
-            System.out.println();
-        }
     }
 
     static void AddTwoDArray(int a[][], int r1, int c1, int b[][], int r2, int c2) {
@@ -48,7 +47,7 @@ public class ArrTwoD_01 {
 
     static void MultiplyTwoArray(int arr[][], int r1, int c1, int arr2[][], int r2, int c2) {
         if (c1 != r2) {
-            System.out.println("Wrong Dimension  - Addition not possible ");
+            System.out.println("Wrong Dimension  - Multiplication is not possible ");
             return;
         } else {
             int MulArr[][] = new int[r1][c2];
@@ -94,38 +93,32 @@ public class ArrTwoD_01 {
                 }
             }
         }
-
         System.out.println("Transpose of a Matrix is : ");
         printArr(arr);
     }
 
-    static int[] reverseArry(int arr[]) {
-        int left = 0, right = arr.length - 1;
-        for (int i = right; i > 0; i--) {
-            if (left < right) {
-                int temp = arr[i];
-                arr[i] = arr[left];
-                arr[left] = temp;
-                left++;
-            }
+    public static void reverseEachRow(int arr[]){
+        int i=0;
+        for (int j =arr.length-1; j>i; j--) {
+            int temp = arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
         }
-        return arr;
     }
 
     static void TransposeReverseArry(int arr[][], int r, int c) {
+        int TraArry[][] = new int[c][r];// size matter in transpose
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
-                if (i < j) {
-                    int temp = arr[i][j];
-                    arr[i][j] = arr[j][i];
-                    arr[j][i] = temp;
-                }
+                TraArry[j][i] = arr[i][j];
             }
         }
         for (int i = 0; i < arr.length; i++) {//i for each row in transpose matrix
-            reverseArry(arr[i]);
+            reverseEachRow(TraArry[i]);
+            // When you call reverseEachRow(traArr[i]), you are passing the reference of the i-th row of the traArr matrix (which is a 2D array). Since arrays are passed by reference, any changes made inside reverseEachRow will directly modify the row in the original traArr
         }
-        printArr(arr);
+        printArr(TraArry);
     }
 
     static void PascalsTriangle(int arr[][],int r,int c){
@@ -172,7 +165,8 @@ public class ArrTwoD_01 {
                 arr[i][j] = sc.nextInt();
             }
         }
-
+        System.out.println("Matrix 1 :");
+        printArr(arr);
         // System.out.println("Enter MATRIX B's Data ==> ");
         // System.out.println("Enter the numebr of rows : ");
         // int r2 = sc.nextInt();
@@ -185,8 +179,6 @@ public class ArrTwoD_01 {
         // arr2[i][j] =sc.nextInt();
         // }
         // }
-        // System.out.println("Matrix 1 :");
-        // printArr(arr);
         // System.out.println("Matrix 2 :");
         // printArr(arr2);
         // ! Ques : Addition of two matrix
@@ -200,6 +192,7 @@ public class ArrTwoD_01 {
 
         // ! Ques : Transpose of a matrix without using extra space means transpse at in
         // place
+        //? NOTE :For Non-Square Matrices, Transposing in place is not possible because the number of rows and columns differ
         // TransposeArryMemo(arr, r1, c1);
 
         // ! Ques : Rotate of two matrix without using extra space at 90deg =====>HINT : Transpose of matrix + reverse each row
@@ -208,6 +201,8 @@ public class ArrTwoD_01 {
         // ! Ques : Print Pascal's triangle
         // int ary[][] = new int[r1][c1];
         // PascalsTriangle(ary,r1,c1);
+
+
         int n=sc.nextInt();
         Pascal(n);
     }

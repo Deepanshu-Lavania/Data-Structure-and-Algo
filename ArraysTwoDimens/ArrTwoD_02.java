@@ -110,9 +110,9 @@ public class ArrTwoD_02 {
         int arr[][] = new int[r1][c1];
         System.out.println("Enter " + r1 * c1 + " elements : ");
         for (int i = 0; i < r1; i++) {
-        for (int j = 0; j < c1; j++) {
-        arr[i][j] = sc.nextInt();
-        }
+            for (int j = 0; j < c1; j++) {
+                arr[i][j] = sc.nextInt();
+            }
         }
 
         System.out.println("Matrix 1 :");

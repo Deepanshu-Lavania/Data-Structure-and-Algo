@@ -85,4 +85,10 @@ let numArr = arr.map(Number); // [1, 2, 3] (now all elements are numbers) */
     </script>
 </body> */}
 
+//? In JavaScript, uninitialized array elements are set to "undefined".
+/* Array Creation Method	Resulting Array	Accessing Element
+let arr = new Array(5);	[ <5 empty items> ]	===> arr[0] returns undefined
+let arr = [];  ===>	[]
+let arr = [1, 2, 3];	===> [1, 2, 3]	 */
+
 
