@@ -14,6 +14,8 @@ public class ArrayList_01 {
         li.set(3, 10);
         System.out.println(li);
         li.add(2);
+        System.out.println("Array list is : "+ li);
+        System.out.println("Integer.valueOf(i) : "+ li.get(Integer.valueOf(3)));
         li.remove(0);//for removing element according to index
         System.out.println(li);
         li.remove(Integer.valueOf(2));//it can't remove the duplicate value when multiple value exist in array

@@ -37,7 +37,7 @@ public class ArrayList_02 {
             System.out.print(l.get(i) + " ");
         }
         System.out.println();
-        System.out.println("l.get(l.size()-1) : " + l.get(l.size() - 1));
+        System.out.println("l.get(l.size()-1) : " + l.get(l.size() - 1));//give last value of arrayList
 
         list.add(5);
         list.add(1);// add in last

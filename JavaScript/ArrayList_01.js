@@ -91,4 +91,11 @@ let arr = new Array(5);	[ <5 empty items> ]	===> arr[0] returns undefined
 let arr = [];  ===>	[]
 let arr = [1, 2, 3];	===> [1, 2, 3]	 */
 
+//! NOTES ;
+/* 1.In JavaScript, arrays are dynamic by default, so you don't need ArrayList.
+ 2. We used .push() to add elements at the end.
+3. The splice() method allows you to add or remove elements at a specific index.
+4. indexOf() helps find the index of an element, and includes() checks if an element is present.
+5. You can use both traditional for loops and forEach() for iterating over the array. */
+
 
